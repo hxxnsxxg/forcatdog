@@ -1,0 +1,148 @@
+@charset "UTF-8";
+::selection {
+	background:#f2ebeb;
+	color: white;
+}
+table {
+	border-collapse: collapse;
+	font-size: 17px;
+}
+.menu1 {
+	float:left;
+	margin-left:40px;
+}
+textarea {
+	margin-top: 5px;
+	height:400px;
+	resize:none;
+}
+.input{
+	width:650px;
+	outline-style:none;
+	border: 1px solid lightgray;
+}
+#ntitle {
+	height:30px;
+}
+.input:focus{
+	border: 1px solid #f2ebeb;
+}
+#container {
+	margin-top:50px;
+	width:1200px;
+}
+#menu1{
+	width:300px;
+	min-height:800px;
+	margin-left: 40px;
+}
+#board{
+	width:700px;
+	height:100%;
+}
+#menu1 ul {
+	list-style-type: none;
+    width: 200px;
+}
+#menu1 li a {
+    display: block;
+    text-decoration: none;
+    border:1px solid #f2ebeb;
+    color:black;
+}
+#menu li a:hover:not(.active) {
+    background-color: #f2ebeb;
+    color: white;
+}
+b {
+	font-size: 35px;
+}
+#click{
+	background-color: #f2ebeb;
+	font-weight: bold;
+    color: white;
+}
+#boardTable {
+	margin-top:5px;
+	min-width:750px;
+}
+#menu td{
+	padding-left:40px;
+}
+#title {
+	height:60px;
+	font-weight:bold;
+	font-size:30px;
+	border-top: 2px solid lightgray;
+}
+.button {
+	margin-left:10px;
+	margin-top: 10px;
+	border-radius: 4px;
+	border:solid 1px #ccc;
+	font-size:12px;
+	width:92px;
+	height: 30px;
+}
+.button:hover {
+	cursor: pointer;
+}
+
+#detailtext {
+    margin-top: 10px;
+    height: 200px;
+    resize: none;
+    width: 600px;
+    background: #F7F7FC;
+    border: solid 2px lightgray;
+}
+
+#Mbtn{
+	font-weight: bold;
+    background: #b3d9ff;
+    font-size: 13px;
+    border-radius: 5px;
+    border: 2px solid #b3d9ff;
+    width: 80px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+    margin-left: 435px;
+}
+
+#Dbtn{
+	font-weight: bold;
+    background: #b3d9ff;
+    font-size: 13px;
+    border-radius: 5px;
+    border: 2px solid #b3d9ff;
+    width: 80px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+}
+
+#Lbtn{
+	font-weight: bold;
+    background: #F2EBEB;
+    font-size: 13px;
+    border-radius: 5px;
+    border: 2px solid #F2EBEB;
+    width: 80px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+    margin-left:100px;
+}
+#Lbtn1{
+	font-weight: bold;
+    background: #F2EBEB;
+    font-size: 13px;
+    border-radius: 5px;
+    border: 2px solid #F2EBEB;
+    width: 80px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+    margin-left: 175px;
+}

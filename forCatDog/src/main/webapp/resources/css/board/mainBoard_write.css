@@ -1,0 +1,66 @@
+#title {
+	width: 85%;
+	margin-left: 20px;
+	height: 40px;
+	font-size: 20px;
+}
+
+.delFile{
+	border: none;
+    background: none;
+    font-size: 15px;
+    font-weight: bold;
+    color: orange;
+    outline: none;
+    cursor: pointer;
+}
+
+#fileArea {
+	margin-left: 20px;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+#filetext {
+	margin-left: 20px;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+#bContent {
+	margin-left: 20px;
+	width: 85%;
+	height: 700px;
+	resize: none;
+	font-size: 20px;
+}
+
+.btnArea * {
+	color: white;
+	font-size: 20px;
+	font-weight: bold;
+	border-radius: 5px;
+	border: 1px solid white;
+	width: 110px;
+	height: 40px;
+	margin-left: 20px;
+}
+
+#list {
+	background: gray;
+    outline: none;
+    cursor: pointer;
+}
+
+#write {
+	width: 140px;
+    margin-left: 64%;
+    background: #1a8cff;
+    font-size: 25px;
+    color: white;
+    font-weight: bold;
+    border: #1a8cff;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}

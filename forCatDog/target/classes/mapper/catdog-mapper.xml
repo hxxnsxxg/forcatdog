@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="CatdogMapper">
+	<select id="getDogListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM CATDOG
+		WHERE STATUS = 'Y' AND CATDOG_CATE = 'DOG'
+	</select>
+	
+	<select id="getCatListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM CATDOG
+		WHERE STATUS = 'Y' AND CATDOG_CATE = 'CAT'
+	</select>
+	
+	<select id="getCatDogListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM CATDOG
+		WHERE STATUS = 'Y'
+	</select>
+	
+	<resultMap type="CatdogFile" id="catdogFileResultSet">
+		<id property="fileId" column="FILE_ID"/>
+		<result property="catdogNum" column="CATDOG_NUM"/>
+		<result property="originalFileName" column="ORIGIN_NAME"/>
+		<result property="changeFileName" column="CHANGE_NAME"/>
+		<result property="status" column="STATUS"/>
+	</resultMap>
+	
+	<resultMap type="Catdog" id="catdogResultSet">
+		<id property="cd_num" column="CATDOG_NUM"/>
+		<result property="cd_cate" column="CATDOG_CATE"/>
+		<result property="cd_name" column="CATDOG_NAME"/>
+		<result property="cd_lifespan" column="CATDOG_LIFESPAN"/>
+		<result property="cd_birth" column="CATDOG_BIRTH"/>
+		<result property="cd_weight" column="CARDOG_WEIGHT"/>
+		<result property="cd_personality" column="CATDOG_PERSONALITY"/>
+		<result property="cd_explain" column="CATDOG_EXPLAIN"/>
+		<result property="cd_status" column="STATUS"/>
+		
+		<collection property="fileList" javaType="arraylist" resultMap="catdogFileResultSet" ofType="CatdogFile"/>
+	</resultMap>
+	
+	<select id="selectDogList" resultMap="catdogResultSet">
+		SELECT CD.CATDOG_NUM , CD.CATDOG_CATE, CD.CATDOG_NAME, CDF.FILE_ID, CDF.CATDOG_NUM, CDF.ORIGIN_NAME, CDF.CHANGE_NAME, CDF.STATUS
+		FROM CATDOG CD
+                 JOIN CATDOG_FILE CDF ON(CDF.FILE_ID = (SELECT MIN(FILE_ID) FROM CATDOG_FILE C WHERE CD.CATDOG_NUM = C.CATDOG_NUM AND C.STATUS='Y'))
+		WHERE CD.STATUS = 'Y' AND CDF.STATUS='Y' AND CATDOG_CATE= 'DOG'
+		ORDER BY CD.CATDOG_NUM DESC
+	</select>
+	
+	<select id="selectCatList" resultMap="catdogResultSet">
+		SELECT CD.CATDOG_NUM , CD.CATDOG_CATE, CD.CATDOG_NAME, CDF.FILE_ID, CDF.CATDOG_NUM, CDF.ORIGIN_NAME, CDF.CHANGE_NAME, CDF.STATUS
+		FROM CATDOG CD
+                 JOIN CATDOG_FILE CDF ON(CDF.FILE_ID = (SELECT MIN(FILE_ID) FROM CATDOG_FILE C WHERE CD.CATDOG_NUM = C.CATDOG_NUM AND C.STATUS='Y'))
+		WHERE CD.STATUS = 'Y' AND CDF.STATUS='Y' AND CATDOG_CATE= 'CAT'
+		ORDER BY CD.CATDOG_NUM DESC
+	</select>
+	
+	<select id="selectCatDogList" resultMap="catdogResultSet">
+		SELECT CD.CATDOG_NUM , CD.CATDOG_CATE, CD.CATDOG_NAME, CDF.FILE_ID, CDF.CATDOG_NUM, CDF.ORIGIN_NAME, CDF.CHANGE_NAME, CDF.STATUS
+		FROM CATDOG CD
+                 JOIN CATDOG_FILE CDF ON(CDF.FILE_ID = (SELECT MIN(FILE_ID) FROM CATDOG_FILE C WHERE CD.CATDOG_NUM = C.CATDOG_NUM AND C.STATUS='Y'))
+		WHERE CD.STATUS = 'Y' AND CDF.STATUS='Y'
+		ORDER BY CD.CATDOG_NUM DESC
+	</select>
+	
+	<insert id="insertCatdog">
+		INSERT INTO CATDOG VALUES(SEQ_PETCOUNT.NEXTVAL,	
+			#{cd_cate}, #{cd_name}, #{cd_lifespan}, #{cd_birth}, #{cd_weight}, #{cd_personality}, #{cd_explain}, DEFAULT)	
+	</insert>
+	
+	<insert id="insertCatdogFile">
+		INSERT ALL 
+		<foreach collection="fileList" item="cdf">
+		INTO CATDOG_FILE VALUES(PFILE_COUNT, SEQ_PETCOUNT.CURRVAL, #{cdf.originalFileName}, #{cdf.changeFileName}, DEFAULT)
+		</foreach>
+		SELECT * FROM DUAL			 
+	</insert>	
+	
+	<resultMap type="Catdog" id="catdogResultSet2">
+		<id property="cd_num" column="CATDOG_NUM"/>
+		<result property="cd_cate" column="CATDOG_CATE"/>
+		<result property="cd_name" column="CATDOG_NAME"/>
+		<result property="cd_lifespan" column="CATDOG_LIFESPAN"/>
+		<result property="cd_birth" column="CATDOG_BIRTH"/>
+		<result property="cd_weight" column="CARDOG_WEIGHT"/>
+		<result property="cd_personality" column="CATDOG_PERSONALITY"/>
+		<result property="cd_explain" column="CATDOG_EXPLAIN"/>
+		<result property="cd_status" column="STATUS"/>
+		
+		<collection property="fileList" javaType="arraylist" resultMap="catdogFileResultSet" ofType="CatdogFile"/>
+	</resultMap>
+	
+	<select id="selectCatdog" resultMap="catdogResultSet2">
+		SELECT CD.CATDOG_NUM , CD.CATDOG_CATE, CD.CATDOG_NAME, CD.CATDOG_LIFESPAN, CD.CATDOG_BIRTH, CD.CARDOG_WEIGHT, CD.CATDOG_PERSONALITY, 
+			   CD.CATDOG_EXPLAIN, CDF.FILE_ID, CDF.CATDOG_NUM, CDF.ORIGIN_NAME, CDF.CHANGE_NAME, CDF.STATUS
+		FROM CATDOG CD
+			JOIN CATDOG_FILE CDF ON(CD.CATDOG_NUM = CDF.CATDOG_NUM AND CDF.STATUS = 'Y')
+		WHERE CD.STATUS = 'Y' AND CD.CATDOG_NUM = #{cdNum}		
+	</select>
+	
+	<update id="deleteExFile">
+		UPDATE CATDOG_FILE SET STATUS = 'N'
+		WHERE CATDOG_NUM = #{cdNum} 
+			<if test="exFile != null">
+			  AND FILE_ID NOT IN
+			  <foreach collection="exFile" item="fileId" open="(" separator=", " close=")">
+			  		#{fileId}
+			  </foreach>
+			</if>
+	</update>
+	
+	<update id="updateCatdog">
+		UPDATE CATDOG SET CATDOG_CATE = #{cd_cate}, CATDOG_NAME = #{cd_name}, CATDOG_LIFESPAN = #{cd_lifespan}, CATDOG_BIRTH = #{cd_birth},
+		CARDOG_WEIGHT = #{cd_weight}, CATDOG_PERSONALITY = #{cd_personality}, CATDOG_EXPLAIN = #{cd_explain}
+		WHERE STATUS = 'Y' AND CATDOG_NUM = #{cd_num}
+	</update>
+	
+	<update id="updateCatdogFile">
+		INSERT ALL 
+		<foreach collection="fileList" item="cdf" >
+			INTO CATDOG_FILE VALUES(PFILE_COUNT, #{cd_num},
+							 #{cdf.originalFileName}, #{cdf.changeFileName},
+							 DEFAULT)				  
+		</foreach>
+		SELECT * FROM DUAL	
+	</update>
+	
+	<update id="deleteCatdog">
+		UPDATE CATDOG
+		SET STATUS = 'N'
+		WHERE CATDOG_NUM = ${cdNum}
+	</update>
+	
+	<select id="searchDog" resultMap="catdogResultSet">
+		SELECT CD.CATDOG_NUM , CD.CATDOG_CATE, CD.CATDOG_NAME, CDF.FILE_ID, CDF.CATDOG_NUM, CDF.ORIGIN_NAME, CDF.CHANGE_NAME, CDF.STATUS
+		FROM CATDOG CD
+             JOIN CATDOG_FILE CDF ON(CDF.FILE_ID = (SELECT MIN(FILE_ID) FROM CATDOG_FILE C WHERE CD.CATDOG_NUM = C.CATDOG_NUM AND C.STATUS='Y'))
+		WHERE CD.STATUS = 'Y' AND CDF.STATUS='Y'
+		<if test="#{word} != ''">
+		AND CD.CATDOG_NAME LIKE #{word} || '%' AND CATDOG_CATE= 'DOG'
+		</if>
+        ORDER BY CD.CATDOG_NUM DESC
+	</select>
+	
+	<select id="searchCat" resultMap="catdogResultSet">
+		SELECT CD.CATDOG_NUM , CD.CATDOG_CATE, CD.CATDOG_NAME, CDF.FILE_ID, CDF.CATDOG_NUM, CDF.ORIGIN_NAME, CDF.CHANGE_NAME, CDF.STATUS
+		FROM CATDOG CD
+             JOIN CATDOG_FILE CDF ON(CDF.FILE_ID = (SELECT MIN(FILE_ID) FROM CATDOG_FILE C WHERE CD.CATDOG_NUM = C.CATDOG_NUM AND C.STATUS='Y'))
+		WHERE CD.STATUS = 'Y' AND CDF.STATUS='Y'
+		<if test="#{word} != ''">
+		AND CD.CATDOG_NAME LIKE #{word} || '%' AND CATDOG_CATE= 'CAT'
+		</if>
+        ORDER BY CD.CATDOG_NUM DESC
+	</select>
+	
+	<select id="getDogSearchListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM CATDOG
+		WHERE STATUS = 'Y'
+		<if test="#{word} != ''">
+		AND CATDOG_NAME LIKE #{word} || '%' AND CATDOG_CATE= 'DOG'
+		</if>
+	</select>
+	
+	<select id="getCatSearchListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM CATDOG
+		WHERE STATUS = 'Y'
+		<if test="#{word} != ''">
+		AND CATDOG_NAME LIKE #{word} || '%' AND CATDOG_CATE= 'CAT'
+		</if>
+	</select>
+	
+	<select id="selectMainDogList" resultMap="catdogResultSet">
+		<![CDATA[
+		SELECT * 
+		FROM CATDOG CD
+    		 JOIN CATDOG_FILE CDF ON(CDF.FILE_ID = (SELECT MIN(FILE_ID) FROM CATDOG_FILE C WHERE CD.CATDOG_NUM = C.CATDOG_NUM AND C.STATUS = 'Y'))
+		WHERE CATDOG_CATE = 'DOG' AND CD.STATUS = 'Y' AND ROWNUM <= 3
+		ORDER BY CD.CATDOG_NUM DESC 
+		]]>
+	</select>
+	
+	<select id="selectMainCatList" resultMap="catdogResultSet">
+		<![CDATA[
+		SELECT * 
+		FROM CATDOG CD
+    		 JOIN CATDOG_FILE CDF ON(CDF.FILE_ID = (SELECT MIN(FILE_ID) FROM CATDOG_FILE C WHERE CD.CATDOG_NUM = C.CATDOG_NUM AND C.STATUS = 'Y'))
+		WHERE CATDOG_CATE = 'CAT' AND CD.STATUS = 'Y' AND ROWNUM <= 3
+		ORDER BY CD.CATDOG_NUM DESC
+		]]>
+	</select>
+	
+	<select id="searchCatDog" resultType="string">
+		SELECT CATDOG_NAME
+		FROM CATDOG
+		WHERE CATDOG_CATE = #{cate} AND STATUS = 'Y' AND CATDOG_NAME LIKE #{keyword} || '%' AND STATUS = 'Y' AND <![CDATA[ROWNUM <= 8]]>
+		
+	</select>
+	
+</mapper>

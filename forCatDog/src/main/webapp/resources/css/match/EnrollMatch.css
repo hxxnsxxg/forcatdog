@@ -1,0 +1,212 @@
+@charset "UTF-8";
+.match_type_btn{
+	width: 145px;
+	height:55px;
+	font-size: 25px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-style: none;
+	background-color: #bebebe;
+	border-bottom: 5px solid skyblue;
+	font-weight:bold;
+}
+
+#btn_on {
+	border-bottom: 5px solid skyblue;
+}
+
+.match_type_margin_btn0{
+	width: 145px;
+	height:55px;
+	font-size: 25px;
+	border-radius: 5px;
+	border-style: none;
+	background-color: #bebebe;
+	border-bottom: 5px solid #bebebe;
+	margin-left: 40px;
+	font-weight:bold;
+}
+.match_type_margin_btn1{
+	width: 145px;
+	height:55px;
+	font-size: 25px;
+	border-radius: 5px;
+	border-style: none;
+	background-color: #bebebe;
+	border-bottom: 5px solid #bebebe;
+	margin-left: 40px;
+	font-weight:bold;
+}
+.match_content{
+	min-height: 800px;
+	background-color: #F2EBEB;
+}
+.detail_title{
+	display:inline-block;
+	margin-top: 12px;
+	margin-left: 25px;
+	margin-bottom: 12px;
+}
+.input_title{
+	width: 800px;
+	height: 40px;
+	font-size: 26px;
+	background-color: #F2EBEB;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+.match_content hr{
+	border: solid 1px grey;
+	background-color: grey;
+}
+.detail_image_area{
+	height: 300px;
+}
+.detail_image_area img{
+	width: 200px;
+	height: 230px;
+}
+.imgs_wrap img{
+	width: 200px;
+	height: 230px;
+}
+.mypet_detail{
+	margin-top: 30px;
+	margin-left: 50px;
+}
+.mypet_detail_margin{
+	margin-left: 70px;
+}
+.left_info{
+	display: inline-block;
+	width: 26%;
+	height: 425px;
+}
+.right_info{
+	display: inline-block;
+	vertical-align: top;
+	width: 72%;
+	height: 425px;
+}
+.mypet_title{
+	display: inline-block;
+	font-size: 18px;
+	color:#9905D8;
+	font-weight: bold;
+	margin-left: 15px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+.mypet_contents{
+	display: inline-block;
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+.input_dog{
+	width: 200px;
+	height: 35px;
+	font-size: 18px;
+	background-color: #F2EBEB;
+	border-radius: 5px;
+}
+.mypet_contents > .input_dogAge{
+	display: inline-block;
+	width: 60px;
+	height: 35px;
+	font-size: 18px;
+	background-color: #F2EBEB;
+	border-radius: 5px;
+}
+.input_textArea{
+	vertical-align: top;
+	font-size: 20px;
+	margin-top: -50px;
+	background-color: #F2EBEB;
+	font-size: 20px;
+}
+
+.mypet_title_right{
+	float: left;
+	font-size: 18px;
+	color:#9905D8;
+	font-weight: bold;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+.mypet_other_contents{
+	display: inline-block;
+	width: 400px;
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+.mypet_title_right_other_infotitle{
+	display: inline-block;
+	color:#9905D8;
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 20px;
+	margin-left: 15px;
+}
+.returnListBtn{
+	width: 117px;
+	height: 40px;
+	font-size: 17px;
+	border-style: none;
+	border-radius: 3px;
+	font-weight: bold;
+	background-color: #bebebe;
+	margin-top: 100px;
+	margin-left: 20px;
+	margin-bottom: 30px;
+}
+.applyBtn{
+	width: 117px;
+	height: 40px;
+	font-size: 17px;
+	border-style: none;
+	border-radius: 3px;
+	font-weight: bold;
+	background-color: #bebebe;
+	margin-left: 10px;
+	margin-bottom: 30px;
+	
+}
+
+.match_content > Button{
+	vertical-align: bottom;
+}
+
+input:focus {
+	outline:none;
+	
+}
+input, textarea{
+	border: none;
+}
+
+div.match_content img{
+	width: 200px;
+	height: 200px;
+	border-radius: 30px;
+	margin-left: 50px;
+}
+
+#petArea {
+	width: 100%;
+}
+
+#petArea * {
+	display: inline-block;
+	vertical-align: middle;
+	padding: 10px;
+}
+
+#matchContent {
+	width: 80%;
+	height: 300px;
+	margin-left: 5%;
+}

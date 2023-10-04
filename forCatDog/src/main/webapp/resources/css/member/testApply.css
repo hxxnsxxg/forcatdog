@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+.paddingdiv {
+	padding: 50px;
+	padding-top: 10px;
+}
+
+hr {
+	height: 5px;
+    display: block !important;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: -20px;
+    margin-right: -20px;
+    background: #F2EBEB;
+    border: none;
+}
+
+.notice {
+	font-size: 20px;
+}
+
+#obj {
+	border: none;
+	background: none;
+	outline: none;
+	cursor: pointer;
+	width: 150px;
+	font-weight: bold;
+	font-size: 25px;
+	color: gray;
+}
+
+.block {
+	margin-top: 40px;
+}
+
+.block:nth-child(n + 2) {
+	margin-top: 40px;
+}
+
+.block:nth-last-child(1) {
+	float: right;
+	margin: 10px;
+	margin-top: 20px;
+}
+
+.block:nth-last-child(1) button {
+	margin-left: 10px;
+	width: 100px;
+	height: 40px;
+}

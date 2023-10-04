@@ -1,0 +1,23 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'InfinitySans-RegularA1';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+   margin: 0 auto;
+   font-family: 'InfinitySans-RegularA1';
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+.wrap {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}

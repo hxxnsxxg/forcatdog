@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'InfinitySans-RegularA1';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{
+	margin: 0px;
+	padding: 0px;
+	font-family: 'InfinitySans-RegularA1';
+}
+
+.header{
+	height: 40px;
+	font-weight: bold;
+	font-size: 22px;
+	background-color: grey;
+	text-align: center;
+	line-height: 40px;
+}
+.matchingPopupContent{
+	font-weight: bold;
+	font-size: 15px;
+	margin-top: 4px;
+	margin-left: 9px;
+}
+.applyBtn{
+	margin-top: 100px;
+	margin-left: 35px;
+	width: 140px;
+	height: 60px;
+	font-weight: bold;
+	font-size: 27px;
+	border-style: none;
+}
+.closeBtn{
+	margin-top: 100px;
+	margin-left:25px;
+	width: 140px;
+	height: 60px;
+	font-weight: bold;
+	font-size: 27px;
+	border-style: none;
+}

@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+#headline {
+	position: absolute;
+	background-color: #F2EBEB;
+	width: 100%;
+	height: 30px;
+	top: 0px;
+	z-index: -1;
+}
+
+#header {
+	width: 1200px;
+}
+
+#header * {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#AllSearchBtn {
+	cursor: pointer;
+	outline: none;
+}
+
+#linemenu {
+	display: block;
+	height: 30px;
+	background-color: #F2EBEB;
+}
+
+#linemenulink {
+	width: 100%;
+	text-align: right;
+}
+
+#linemenulink div {
+	margin-right: 10px;
+	height: 100%;
+}
+
+#linemenulink a {
+	color : black;
+	text-decoration: none;
+}
+
+#linemenulink a:nth-child(n + 2) {
+	margin-left: 5px;
+}
+
+#logo-img {
+	width: 200px;
+	padding: 10px;
+}
+
+
+#header-search input{
+	border : 2px solid #F2EBEB;
+	width: 350px;
+	height: 35px;
+	margin-left: 200px;
+	font-weight: bold;
+
+}
+
+#header-search button {
+	border : 2px solid #F2EBEB;
+	height: 35px;
+	width: 50px;
+	color: black;
+	font-weight: bold;
+	background: #F2EBEB;
+}
+
+a span {
+	cursor: pointer;
+}
+
+#msgCount {
+	vertical-align: bottom;
+	color: red;
+}

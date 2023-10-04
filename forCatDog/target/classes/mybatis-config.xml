@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+	<typeAliases>
+		<typeAlias type="com.kh.forcatdog.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.forcatdog.member.model.vo.MyPet" alias="MyPet"/>
+		<typeAlias type="com.kh.forcatdog.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.kh.forcatdog.board.model.vo.BoardFile" alias="BoardFile"/>
+		<typeAlias type="com.kh.forcatdog.message.model.vo.Message" alias="Message"/>
+		<typeAlias type="com.kh.forcatdog.customerService.model.vo.Notice" alias="Notice"/>
+		<typeAlias type="com.kh.forcatdog.customerService.model.vo.OperationGuide" alias="Operation"/>
+		<typeAlias type="com.kh.forcatdog.customerService.model.vo.QuestionNAnswer" alias="Qna"/>
+		<typeAlias type="com.kh.forcatdog.board.model.vo.Comment" alias="Comment"/>
+		<typeAlias type="com.kh.forcatdog.member.model.vo.License_Quiz" alias="Quiz"/>
+		<typeAlias type="com.kh.forcatdog.member.model.vo.License_Quiz_Ans" alias="Quiz_Ans"/>
+		<typeAlias type="com.kh.forcatdog.catdog.model.vo.Catdog" alias="Catdog"/>
+		<typeAlias type="com.kh.forcatdog.catdog.model.vo.CatdogFile" alias="CatdogFile"/>
+		<typeAlias type="com.kh.forcatdog.sellshare.model.vo.Sellshare" alias="Sellshare"/>
+		<typeAlias type="com.kh.forcatdog.sellshare.model.vo.SellshareFile" alias="SellshareFile"/>
+		<typeAlias type="com.kh.forcatdog.sellshare.model.vo.SComment" alias="SComment"/>	
+		<typeAlias type="com.kh.forcatdog.match.model.vo.Match" alias="Match"/>
+		<typeAlias type="com.kh.forcatdog.match.model.vo.MatchMember" alias="MatchMember"/>
+		<typeAlias type="com.kh.forcatdog.member.model.vo.MatchChat" alias="MatchChat"/>
+		<typeAlias type="com.kh.forcatdog.manager.model.vo.Report" alias="Report"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mapper/member-mapper.xml"/>
+		<mapper resource="mapper/board-mapper.xml"/>
+		<mapper resource="mapper/message-mapper.xml"/>
+		<mapper resource="mapper/customer-mapper.xml"/>
+		<mapper resource="mapper/catdog-mapper.xml"/>
+		<mapper resource="mapper/sellshare-mapper.xml"/>
+		<mapper resource="mapper/match-mapper.xml"/>
+		<mapper resource="mapper/manager-mapper.xml"/>
+	</mappers>
+</configuration>

@@ -1,0 +1,232 @@
+@charset "UTF-8";
+
+.b_detail {
+	width: 90%;
+	border: 1px solid lightgray;
+	padding: 25px;
+	margin-bottom: 50px;
+}
+
+#boardTitle {
+	margin-top: 20px;
+	font-size: 30px;
+	padding-left: 10px;
+	font-weight: bold;
+}
+
+#infoBar {
+	vertical-align: middle;
+}
+
+#infoBar * {
+	display: inline-block;
+}
+
+#nickName {
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.reportBtn {
+	float: right;
+	color: red;
+	font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    outline: none;
+}
+
+#report_comment {
+	float: right;
+	color: red;
+	font-weight: bold;
+    font-size: 15px;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.comment_area input {
+    border: 1px solid white;
+    outline: none;
+}
+
+#updateBtn {
+	color: orange;
+	background: white;
+	border: none;
+	font-weight: bold;
+	cursor: pointer;
+	outline:none;
+}
+
+#commentD{
+	background: white;
+	border: none;
+	font-weight: bold;
+	cursor: pointer;
+	color: red;
+    outline: none;
+}
+
+#updateCancel {
+	background: white;
+	border: none;
+	font-weight: bold;
+	cursor: pointer;
+	outline:none;
+	font-size: 15px;
+}
+
+.comment_area {
+	position: relative;
+    font-size: 17px;
+}
+
+.comment_area>* {
+	display: inline-block;
+	margin-top: 20px;
+	font-weight: bold;
+}
+
+.comment_date {
+	color: gray;
+	font-size: 14px;
+}
+
+.reportComment {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	color: red;
+	font-weight: bold;
+    font-size: 15px;
+}
+
+.commentWrite {
+	position: relative;	
+	width: 100%;
+	height: 100px;
+	border: 1px solid lightgray;
+	margin-top: 20px;
+}
+
+#coco {
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.commentWrite textarea {
+	width: 90%;
+	resize: none;
+	border: none;
+	outline: none;
+	overflow: visible;
+}
+
+#commentInfo {
+	margin-left: 15px;
+	margin-top: 10px;	
+}
+
+.commentWrite form {
+	text-align: center;
+}
+
+#boardCount, #createDate{
+	font-weight:bold;
+	font-size: 17px;
+}
+
+#boardContent {
+   width: 100%;
+   padding: 20px;
+   resize: none;
+   word-break:break-all;
+   font-weight: bold;
+   font-size: 17px;
+}
+
+#profile {
+	width: 60px;
+    height: 60px; 
+    border-radius: 70%;
+    overflow: hidden;
+}
+
+#profile img {
+	width: 100%;
+    height: 100%;
+    object-fit: cover;	
+}
+
+#field {
+	margin-left: 0%;
+    width: 100%;
+}
+
+#Mbtn, #Dbtn, #cSubmit {
+	background: white;
+	border: none;
+	font-size: 18px;
+    font-weight: bold;
+    outline: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+#Mbtn{
+	color: orange;
+}
+#Dbtn{
+	color: red;
+}
+
+#cSubmit {
+    color: #0099ff;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+#toList {
+	background: white;
+	border: 1px solid white;
+	color: gray;
+	font-weight: bold;
+	font-size: 25px;
+	padding: 5px;
+	margin-top: 20px;
+	margin-left: 45%;
+	outline: none;
+	cursor: pointer;
+}
+
+#sendmsg {
+   border: none;
+   background: white;
+   outline: none;
+   color: #35a4f3;
+   font-size: 15px;
+   font-weight: bold;
+   margin-left: 10px;
+   margin-right: 300px;
+   cursor: pointer;
+}
+
+#updated {
+	 color: red; 
+	 font-size: 13px;
+}
+
+#reComment {
+	outline: none;
+	cursor: pointer;
+	font-size: 15px;
+}
+
+.inline {
+	font-weight: bold;
+	font-size : 20px;
+}

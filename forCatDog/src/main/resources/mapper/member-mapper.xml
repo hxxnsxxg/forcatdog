@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="memberMapper">
+	<select id="selectPWHint" resultType="map">
+		SELECT * 
+		FROM PW_HINT
+	</select>
+	
+	<select id="selectId" parameterType="hashmap" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE MEMBER_ID = #{id}
+	</select>
+	
+	<select id="selectNickname" parameterType="hashmap" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE NICKNAME = #{nickName}
+	</select>
+	
+	<select id="selectSido" resultType="string">
+		SELECT SIDO_NAME 
+		FROM LOCATION 
+		GROUP BY SIDO_NAME 
+		ORDER BY SIDO_NAME
+	</select>
+	
+	<select id="selectSiGunGu" parameterType="hashmap" resultType="string">
+		SELECT SIGUNGU_NAME 
+		FROM LOCATION 
+		WHERE SIDO_NAME = #{sido} 
+		GROUP BY SIGUNGU_NAME 
+		ORDER BY SIGUNGU_NAME
+	</select>
+	
+	<select id="selectDong" parameterType="hashmap" resultType="string">
+		SELECT DONG_NAME 
+		FROM LOCATION 
+		WHERE SIDO_NAME = #{sido}
+			  AND SIGUNGU_NAME = #{sigungu} 
+		GROUP BY DONG_NAME 
+		ORDER BY DONG_NAME
+	</select>
+	
+	<insert id="insertMember">
+		INSERT INTO MEMBER VALUES(#{id}, #{pw}, #{gender}, #{name}, #{nickName}, 
+								  #{email}, #{phone}, #{birth}, #{pwHintNo}, #{pwHintAns}, 
+								  DEFAULT, DEFAULT, #{addr1}, #{addr2}, #{addr3}, 
+								  SYSDATE, SYSDATE, DEFAULT)
+	</insert>
+	
+	<resultMap type="Member" id="memberResultSet">
+		<id property="id" column="MEMBER_ID"/>
+		<result property="pw" column="MEMBER_PW"/>
+		<result property="gender" column="GENDER"/>
+		<result property="name" column="NAME"/>
+		<result property="nickName" column="NICKNAME"/>
+		<result property="email" column="EMAIL"/>
+		<result property="phone" column="PHONE"/>
+		<result property="birth" column="BIRTH"/>
+		<result property="pwHintNo" column="PW_HINT_NUM"/>
+		<result property="pwHintAns" column="PW_ANS"/>
+		<result property="adminQ" column="ADMIN_Q"/>
+		<result property="petQ" column="PET_Q"/>
+		<result property="addr1" column="SIDO_NAME"/>
+		<result property="addr2" column="SIGUNGU_NAME"/>
+		<result property="addr3" column="DONG_NAME"/>
+		<result property="enrollDate" column="ENROLL_DATE"/>
+		<result property="updateDate" column="UPDATE_DATE"/>
+		<result property="status" column="STATUS"/>
+		<result property="originFileName" column="ORIGIN_NAME"/>
+		<result property="changeFileName" column="CHANGE_NAME"/>
+	</resultMap>
+	
+	<select id="selectMember" resultMap="memberResultSet">
+		SELECT * 
+		FROM MEMBER
+			 LEFT JOIN MEMBER_PROFILE USING(MEMBER_ID)
+		WHERE MEMBER_ID = #{id}
+	</select>
+	
+	<update id="updateMember">
+		UPDATE MEMBER SET NICKNAME = #{nickName}, BIRTH = #{birth}, EMAIL = #{email}, 
+									 PHONE = #{phone}, PW_HINT_NUM = #{pwHintNo}, 
+									 PW_ANS = #{pwHintAns}, SIDO_NAME = #{addr1}, 
+									 SIGUNGU_NAME = #{addr2}, DONG_NAME = #{addr3}, 
+									 UPDATE_DATE = SYSDATE
+		WHERE STATUS = 'Y' AND MEMBER_ID = #{id}
+	</update>
+	
+	<update id="updatePw">
+		UPDATE MEMBER SET MEMBER_PW = #{pw}
+		WHERE STATUS = 'Y' AND MEMBER_ID = #{id}
+	</update>
+	
+	<insert id="insertMyPet">
+		INSERT INTO MYPET VALUES(SEQ_MPETCOUNT.NEXTVAL, #{memberId}, #{petName}, 
+								 #{petType1}, #{petType2}, #{gender}, #{weight}, 
+								 #{birthYear},  #{personality}, #{inform})
+	</insert>
+	<insert id="insertMyPetImg">
+		INSERT INTO MYPET_FILE VALUES(SEQ_MPETCOUNT.CURRVAL, #{originFileName}, #{changeFileName})
+	</insert>
+	
+	<resultMap type="MyPet" id="mypetResultSet">
+		<id property="petNum" column="PET_NUM"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="petName" column="PETNAME"/>
+		<result property="nickName" column="NICKNAME"/>
+		<result property="petType1" column="PET_TYPE"/>
+		<result property="petType2" column="DOG_CAT_TYPE"/>
+		<result property="gender" column="GENDER"/>
+		<result property="weight" column="WEIGHT"/>
+		<result property="birthYear" column="BIRTHYEAR"/>
+		<result property="personality" column="PERSONALITY"/>
+		<result property="inform" column="INFORM"/>
+		<result property="originFileName" column="ORIGIN_NAME"/>
+		<result property="changeFileName" column="CHANGE_NAME"/>
+	</resultMap>
+	
+	<select id="selectMyPetList" resultMap="mypetResultSet">
+		SELECT *
+		FROM MYPET
+			 JOIN MYPET_FILE USING(PET_NUM)
+		WHERE MEMBER_ID = #{id} AND ROWNUM BETWEEN 1 AND 4
+	</select>
+	
+	<select id="selectMyPet" resultMap="mypetResultSet">
+		SELECT *
+		FROM MYPET
+			 JOIN MYPET_FILE USING(PET_NUM)
+		WHERE PET_NUM = #{petNum}
+	</select>
+	
+	<update id="updateMyPet">
+		UPDATE MYPET SET PETNAME = #{petName}, PET_TYPE = #{petType1}, DOG_CAT_TYPE = #{petType2},
+								   GENDER = #{gender}, WEIGHT = #{weight}, BIRTHYEAR = #{birthYear},
+								   PERSONALITY = #{personality}, INFORM = #{inform}
+		WHERE PET_NUM = #{petNum} AND MEMBER_ID = #{memberId}
+	</update>
+	
+	<update id="updateMyPetImg">
+		UPDATE MYPET_FILE SET ORIGIN_NAME = #{originFileName}, CHANGE_NAME = #{changeFileName}
+		WHERE PET_NUM = #{petNum}
+	</update>
+	
+	<delete id="deleteMyPet">
+		DELETE FROM MYPET
+		WHERE PET_NUM = #{petNum} AND MEMBER_ID = #{memberId}
+	</delete>
+	
+	<update id="mergeProgileImg">
+		MERGE INTO MEMBER_PROFILE MP
+		USING DUAL ON(MP.MEMBER_ID = #{id})
+   		WHEN MATCHED THEN
+        UPDATE SET ORIGIN_NAME = #{originFileName}, CHANGE_NAME = #{changeFileName}
+    	WHEN NOT MATCHED THEN
+        INSERT VALUES(#{id}, #{originFileName}, #{changeFileName})
+	</update>
+	
+	<select id="selectMyPetAllList" resultMap="mypetResultSet">
+		SELECT *
+		FROM MYPET
+			 JOIN MYPET_FILE USING(PET_NUM)
+		WHERE MEMBER_ID = #{id}
+	</select>
+	
+	<select id="getMyPetListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM MYPET
+		WHERE MEMBER_ID = #{id}
+	</select>
+	
+	<select id="findMyId" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER
+		WHERE NAME = #{name} AND PHONE = #{phone} AND BIRTH = #{birth} AND STATUS = 'Y'
+	</select>
+	
+	<select id="findMyPwd" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER
+		WHERE MEMBER_ID = #{id} AND PW_HINT_NUM = #{pwHintNo} AND PW_ANS = #{pwHintAns}
+	</select>
+	
+	<update id="findChangePwd">
+		UPDATE MEMBER
+		SET MEMBER_PW = #{pw}
+		WHERE MEMBER_ID = #{id}
+	</update>
+	
+	<resultMap type="Quiz" id="QuizResultSet">
+		<id property="quiz_num" column="QUIZ_NUM"/>
+		<result property="quiz_difficulty" column="QUIZ_DIFFICULTY"/>
+		<result property="quiz_category" column="QUIZ_CATEGORY"/>
+		<result property="quiz_content" column="QUIZ_CONTENT"/>
+		<result property="quiz_choice" column="QUIZ_CHOICE"/>
+		
+		<collection property="cList" javaType="arraylist" resultMap="Quiz_AnsResultSet" ofType="Quiz_Ans"/>
+	</resultMap>
+	
+	<resultMap type="Quiz_Ans" id="Quiz_AnsResultSet">
+		<result property="quiz_num" column="QUIZ_NUM"/>
+		<result property="quiz_choice" column="QUIZ_CHOICE"/>
+		<result property="ans_check" column="ANS_CHECK"/>
+	</resultMap>
+	
+	<select id="selectTest" resultMap="QuizResultSet">
+		<![CDATA[
+		SELECT L.*, LQA.QUIZ_CHOICE, LQA.ANS_CHECK
+		FROM (SELECT ROW_NUMBER() OVER(PARTITION BY QUIZ_DIFFICULTY ORDER BY DBMS_RANDOM.RANDOM()) Q, LQ.* 
+          	  FROM LICENSE_QUIZ LQ
+          	  WHERE QUIZ_CATEGORY = #{cate}) L
+      		LEFT JOIN (SELECT LQA.QUIZ_NUM, LQA.QUIZ_CHOICE, LQA.ANS_CHECK
+                 FROM (SELECT 0 QA, LQA.*
+                       FROM LICENSE_QUIZ_ANS LQA
+                       WHERE ANS_CHECK = 'Y'
+                       UNION
+                       SELECT *
+                       FROM (SELECT ROW_NUMBER() OVER(PARTITION BY QUIZ_NUM ORDER BY DBMS_RANDOM.RANDOM()) QA, LQA.*
+                             FROM LICENSE_QUIZ_ANS LQA
+                             WHERE ANS_CHECK = 'N')
+                       WHERE QA <= 3) LQA
+                 ORDER BY DBMS_RANDOM.RANDOM()) LQA ON(L.QUIZ_NUM = LQA.QUIZ_NUM)
+		WHERE Q <= 3
+		ORDER BY QUIZ_DIFFICULTY, L.Q
+		]]>
+	</select>
+	
+	<select id="checkTest" resultType="_int">
+		SELECT COUNT(*)
+		FROM LICENSE_QUIZ_ANS
+		WHERE 
+			<foreach collection="list" item="qa" separator=" OR ">
+				QUIZ_NUM = #{qa.quiz_num} AND QUIZ_CHOICE = #{qa.quiz_choice} AND ANS_CHECK = 'Y'
+			</foreach>
+	</select>
+	
+	<update id="changeQuiz_Status">
+		UPDATE MEMBER SET PET_Q = 'Y'
+		WHERE MEMBER_ID = #{id}
+	</update>
+	
+	<update id="pauseUser">
+		UPDATE MEMBER
+		SET STATUS = 'P', UPDATE_DATE = SYSDATE + #{days}
+		WHERE MEMBER_ID IN 
+		<foreach collection="list" open="(" separator=", " close=")" item="u">
+			#{u}
+		</foreach>
+	</update>
+	
+	<update id="deleteUser">
+		UPDATE MEMBER
+		SET STATUS = 'N'
+		WHERE MEMBER_ID = #{user}
+	</update>
+	
+	<select id="getselectMemberList" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE STATUS='Y'
+	</select>
+	
+	<select id="selectMemberList" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER
+		WHERE STATUS='Y'
+	</select>
+	
+	<select id="searchMemberCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		<if test="cate != null">
+			<choose>
+				<when test='cate == "member_Id"'>
+					WHERE MEMBER_ID LIKE '%'||#{ keyword }||'%' 
+				</when>
+				<when test='cate == "member_name"'>
+					WHERE NAME LIKE '%'||#{ keyword }||'%' 
+				</when>
+			</choose>
+		</if>
+	</select>
+	
+	<select id="searchMemberList" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER
+		<if test="cate != null">
+			<choose>
+				<when test='cate == "member_Id"'>
+					WHERE MEMBER_ID LIKE '%'||#{ keyword }||'%' 
+				</when>
+				<when test='cate == "member_name"'>
+					WHERE NAME LIKE '%'||#{ keyword }||'%' 
+				</when>
+			</choose>
+		</if>
+	</select>
+	
+	<select id="selectPetType" resultType="string">
+		SELECT CATDOG_NAME
+		FROM CATDOG
+		WHERE CATDOG_CATE = #{petType}
+	</select>
+	
+	<select id="selectChatMemberInfo" resultMap="memberResultSet">
+		SELECT MEMBER_ID, NICKNAME, CHANGE_NAME
+		FROM MEMBER
+			 LEFT JOIN MEMBER_PROFILE USING(MEMBER_ID)
+		WHERE MEMBER_ID = #{memberId}
+	</select>
+	
+	<update id="updateStopMember">
+		UPDATE MEMBER SET STATUS = 'Y'
+		WHERE MEMBER_ID = #{id}
+	</update>
+	
+	<select id="selectMemberNickname" resultType="string">
+		SELECT NICKNAME
+		FROM MEMBER
+		WHERE MEMBER_ID = #{id}
+	</select>
+</mapper>

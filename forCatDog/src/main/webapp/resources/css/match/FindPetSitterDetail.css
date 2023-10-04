@@ -1,0 +1,217 @@
+@charset "UTF-8";
+.match_title{
+	margin-bottom: 20px;
+}
+.match_type_btn{
+	width: 145px;
+    height: 55px;
+    font-size: 25px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border-style: none;
+    background: none;
+    font-weight: bold;
+}
+.match_type_margin_btn0{
+	width: 160px;
+    height: 55px;
+    font-size: 25px;
+    margin-top: 10px;
+    margin-left: 30px;
+    border-radius: 10px;
+    border-style: none;
+    background: none;
+    font-weight: bold;
+}
+.match_type_margin_btn1{
+	width: 145px;
+    height: 55px;
+    font-size: 25px;
+    margin-top: 10px;
+    margin-left: 30px;
+    border-radius: 10px;
+    border-style: none;
+    background: #F2EBEB;
+    font-weight: bold;
+}
+.match_type_right{
+	width: 145px;
+	height:55px;
+	font-size: 25px;
+	color: white;
+	margin-left: 44%;
+	margin-top: 10px;
+	border-radius: 10px;
+	border-style: none;
+	background: #1a8cff;
+	font-weight:bold;
+}
+input[type='button'], input[type='submit'], button{
+	outline: none;
+	cursor: pointer;
+}
+.match_content{
+	min-height: 800px;
+	background : none;
+	border-radius: 4px;
+	border: 1px solid rgba(0,0,0,0.1);
+	margin: 25px 0 100px 0;
+}
+.detail_title{
+	display:inline-block;
+	margin-top: 30px;
+	margin-left: 30px;
+	margin-bottom: 12px;
+}
+.match_content hr{
+	border: solid 1px grey;
+	background-color: grey;
+}
+
+.match_content img{
+	width: 400px;
+	height: 400px;
+	border-radius: 11px;
+}
+.mypet_detail{
+	margin-left: 30px;
+	object-fit: cover;
+}
+
+.inform{
+	margin-top : 30px;
+	display : inline-block;
+	width : 100%;
+	min-height: 600px;
+}
+.inform_area{
+	display: inline-block;
+	vertical-align: top;
+	width: 580px;
+	height: 200px;
+}
+.info_area{
+	display: inline-block;
+	vertical-align: top;
+}
+.btnArea{
+	height: 70px;
+	margin-bottom: 20px;
+}
+.font_deco1{
+	display: inline-block;
+    margin-left: 40px;
+    margin-right: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    color: gray;
+    margin-bottom: 15px;
+}
+.font_deco2{
+	display: inline-block;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.fd2width{
+	width: 900px;
+}
+.font_deco3{
+	display: inline-block;
+	margin-left: 90px;
+	font-size: 22px;
+    font-weight: bold;
+	margin-bottom: 27px;
+	width: 600px;
+}
+.font_deco4{
+	display: inline-block;
+    margin-left: 40px;
+    margin-top: 40px;
+    font-size: 20px;
+    color: gray;
+    font-weight: bold;
+}
+
+.font_deco2_width{
+	margin-left: 40px;
+	font-size: 22px;
+    font-weight: bold;
+}
+
+.font_deco5{
+	display: inline-block;
+    margin-left: 20px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.matchContent{
+	margin-left: 10px;
+	min-height: 300px;
+}
+.matchContent > .font_deco2{
+	margin-left: 20px;
+}
+.returnListBtn, .updateMatch, .deleteMatch{
+	width: 150px;
+    height: 40px;
+    font-size: 25px;
+    border-style: none;
+    border-radius: 3px;
+    font-weight: bold;
+    background: white;
+    color: black;
+    font-weight: bold;
+	margin-left: 20px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	float: left;
+}
+
+.updateMatch{
+	color: #1a8cff;
+}
+
+.deleteMatch{
+	color: red;
+}
+
+.applyBtn, .sendMessageBtn{
+	width: 180px;
+    height: 40px;
+    font-size: 30px;
+    border-style: none;
+    border-radius: 3px;
+    font-weight: bold;
+    background: none;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+    float: right;
+    color: #1a8cff;
+}
+
+.sendMessageBtn {
+	color: #1bad31;
+}
+
+
+.important{
+	width: 100%;
+	margin-left: 14px;
+}
+.important_title{
+	color: #FF5050;
+	font-weight: bold;
+	margin-top: 10px;
+	margin-left: 15px;
+	font-size: 20px;
+}
+.important_content{
+	color: #FF5050;
+	font-weight: bold;
+	margin-top: 20px;
+	margin-left: 15px;
+	font-size: 18px;
+}
