@@ -1,0 +1,78 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'InfinitySans-RegularA1';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+	font-family: 'InfinitySans-RegularA1';
+}
+
+body {
+	text-align: center;
+}
+#messageBox {
+	position: absolute; left: 50%; top:60%; transform: translate(-50%, -50%);
+	width:540px;
+	height: 390px;
+	text-align: center;
+}
+#sender {
+	text-align: left;
+	font-size: 14px;
+}
+b {
+	margin-left: 4px;
+}
+#closeBtn {
+	border-radius: 4px;
+	border:solid 1px #ccc;
+	font-size:12px;
+	width:92px;
+	height: 30px;
+	background: #f0584b;
+	color: white;
+	cursor: pointer;
+}
+
+#answerBtn {
+	border-radius: 4px;
+	border:solid 1px #ccc;
+	font-size:12px;
+	width:92px;
+	height: 30px;
+	background: #767676;
+	color: white;
+	cursor: pointer;
+}
+
+#nickName {
+	display: inline-block;
+	width: 250px;
+	height: 25px;
+	font-size:15px;
+}
+
+#sendDate {
+	display: inline-block;
+	width: 250px;
+	height: 25px;
+	font-size:15px;
+}
+
+#mContent {
+	text-align: left;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 513px;
+	height: 306px;
+	display: inline-block;
+	border: 1px solid gray;
+	overflow: auto;
+	padding: 10px;
+	font-size: 15px;
+}
+

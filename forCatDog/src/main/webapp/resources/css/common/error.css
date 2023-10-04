@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+#error-container {
+	text-align: center;
+	padding-top: 250px;
+}
+
+#tri{
+	font-size: 35px;
+}
+
+#announce {
+	font-size: 50px;
+	font-weight: bold;
+}
+
+
+#exclamation{
+	color: orange;
+}
+#btn {
+	outline: none;
+    cursor: pointer;
+    width: 250px;
+    font-size: 30px;
+    font-weight: ;
+    font-weight: bold;
+    background: none;
+    border: none;
+    color: gray;
+}

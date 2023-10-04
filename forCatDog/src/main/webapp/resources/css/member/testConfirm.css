@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+.paddingdiv {
+	padding: 50px;
+	padding-top: 10px;
+}
+
+#select {
+	font-weight: bold;
+	font-size: 25px;
+	margin-left: 27%;
+}
+
+.catdog{
+	font-weight: bold;
+	font-size: 25px;
+	margin-left: 200px;
+}
+
+#choose {
+    heigth: 100px;
+    height: 50px;
+    padding: 15px;
+    margin-left: 25%;
+}
+
+.radio, #allow {
+	width: 25px;
+	height: 25px;
+}
+
+#allow{
+	margin-left: 10%;
+}
+
+#announce{
+	font-size: 20px;
+}
+
+.btns{
+	margin-top: 20px;
+}
+
+#okayBtn {
+	margin-left: 20%;
+	border: none;
+	border-radius: 10px;
+	background: #1a8cff;
+	outline: none;
+	cursor: pointer;
+	width: 150px;
+	font-weight: bold;
+	font-size: 25px;
+	color: white;
+}
+
+#cancelBtn {
+	margin-left: 30px;
+	border-radius: 10px;
+	border: none;
+	background: gray;
+	outline: none;
+	cursor: pointer;
+	width: 150px;
+	font-weight: bold;
+	font-size: 25px;
+	color: white;
+}

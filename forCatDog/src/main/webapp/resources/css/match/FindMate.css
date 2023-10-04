@@ -1,0 +1,198 @@
+@charset "UTF-8";
+.match_content .pagination{
+	text-align: center;
+}
+.match_title{
+	margin-bottom: 20px;
+}
+.match_type_btn{
+	width: 145px;
+	height:55px;
+	font-size: 25px;
+	margin-top: 10px;
+	border-radius: 10px;
+	border-style: none;
+	background: none;
+	font-weight:bold;
+}
+.match_type_margin_btn0, #btn_on{
+	width: 160px;
+	height:55px;
+	font-size: 25px;
+	margin-top: 10px;
+	margin-left: 30px;
+	border-radius: 10px;
+	border-style: none;
+	background: #F2EBEB;
+	font-weight:bold;
+}
+.match_type_margin_btn1{
+	width: 145px;
+    height: 55px;
+    font-size: 25px;
+    margin-top: 10px;
+    margin-left: 30px;
+    border-radius: 10px;
+    border-style: none;
+    background: none;
+    font-weight: bold;
+}
+input[type='button'], input[type='submit'], button{
+	outline: none;
+	cursor: pointer;
+}
+.match_type_right{
+	width: 145px;
+	height:55px;
+	font-size: 25px;
+	color: white;
+	margin-left: 40%;
+	margin-top: 10px;
+	border-radius: 10px;
+	border-style: none;
+	background: #1a8cff;
+	font-weight:bold;
+}
+
+.match_content{
+	min-height: 800px;
+/* 	background-color: #F2EBEB; */
+	
+}
+.match-pet-align{
+	width: 550px;
+	display: inline-block;
+}
+#overflow{
+	text-overflow: ellipsis;
+	white-space:nowrap;
+	overflow: hidden;
+}
+
+.mypet_img{
+	display: inline-block;
+	margin-left: 110px;
+	margin-top: 33px;
+	margin-bottom: 70px;
+	float: "left";
+	cursor: pointer;
+}
+.mypet_size{
+	float:left;
+	width:176px;
+	height: 200px;
+}
+.mypet_content{
+	float:left;
+	height: 200px;
+	margin-left: 25px;
+}
+.mypet_title{
+	font-size: 24px;
+	color:#9905D8;
+	font-weight: bold;
+}
+.mypet_margin{
+	font-weight: bold;
+	width: 150px;
+}
+.mypet_name{
+	margin-top: 5px;
+	margin-left: 85px;
+	font-weight: bold;
+}
+.paging_area{
+	
+}
+.pagination {
+  margin-top: 50px;
+  display: inline-block;
+}
+
+.pagination button {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+  background-color: white;
+  height: 40px;
+  border-radius: 3px;
+}
+
+.pagination button.active {
+  background-color: #1E90FF;
+  color: white;
+  border: 1px solid #1E90FF;
+}
+
+.pagination button:hover:not(.active) {
+	background-color: #ddd;
+}
+.paging_area{
+	width:100%;
+	text-align: center;
+}
+
+
+
+
+
+.border_shape:hover{
+	transform:scale(1.05);
+}
+.mshape{
+	position: relative;
+}
+.border_shape{
+	cursor: pointer;
+    margin: 100px 0 0 70px;
+    border: solid 1px #eee;
+    border-radius: 11px;
+    width: 300px;
+    height: 275px;
+    display: inline-block;
+    transition: 0.2s;
+}
+.border_shape img{
+    border-top-left-radius: 11px;
+    border-top-right-radius: 11px;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.matching{
+    position: absolute;
+    top: 6px;
+    left: 239px;
+    color: white;
+    border-radius: 4px;
+    font-size: 1rem;
+    padding: 5px;
+    background-color: pink;
+}
+.post_thumbnail{
+    box-sizing: border-box;
+    outline: none;
+    list-style: none;
+}
+.post_title{
+	height: 51px;
+}
+.post_title a{
+	display: block;
+    color: #333;
+    padding:0 15px;
+/*     height: 51px; */
+    text-decoration: none;
+    transition: 0.15s;
+    line-height: 32px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.post_title a:hover{
+    color: pink;
+}

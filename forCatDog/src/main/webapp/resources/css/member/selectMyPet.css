@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'InfinitySans-RegularA1';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{
+	font-family: 'InfinitySans-RegularA1';
+}
+.paddingdiv {
+	padding: 50px;
+}
+
+.paddingdiv * {
+	display: inline-block;
+}
+
+.block {
+	position: relative;
+	display: block;
+	margin-bottom: 40px;
+}
+
+hr {
+	display: block !important;
+	margin-top: -20px;
+	margin-bottom: 20px;
+	margin-left: -20px;
+	margin-right: -20px;
+}
+
+#insertPetBtn {
+	float: right;
+	height: 25px;
+	margin-left: 20px;
+	margin-top: 20px;
+}
+
+.pet {
+   display: inline-block;
+   margin-top: 20px;
+   width: 200px;
+   cursor: pointer;
+   text-align: center;
+}
+
+.pet * {
+   display: block;
+   text-align: center;
+}
+
+.petImgArea {
+   margin: 0 auto;
+   width: 125px;
+   height: 125px; 
+   border-radius: 25%;
+   overflow: hidden;
+   cursor: pointer;
+}
+
+.petImg {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;	
+}
+
+.pet span{
+   font-weight: bold;
+   color: black;
+   font-size: 20px;
+}
+
+.pet p {
+   font-size: 15px;
+}
+
+.pet:nth-child(n + 2) {
+   margin-left: 20px;
+}
+
+.pagingArea {
+	text-align: center;
+	width: 100%;
+}

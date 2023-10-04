@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="matchMapper">
+	<resultMap type="Match" id="matchResultSet">
+		<id property="matchNum" column="MATCH_NUM"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="nickName" column="NICKNAME"/>
+		<result property="matchCate" column="MATCH_CATE"/>
+		<result property="matchTitle" column="MATCH_TITLE"/>
+		<result property="matchContent" column="MATCH_CONTENT"/>
+		<result property="matchDate" column="MATCH_DATE"/>
+		<result property="status" column="STATUS"/>
+		<result property="matchStatus" column="MATCH_STATUS"/>
+		
+		<result property="addr1" column="SIDO_NAME"/>
+		<result property="addr2" column="SIGUNGU_NAME"/>
+		<result property="addr3" column="DONG_NAME"/>
+		
+		<collection property="petList" javaType="arrayList" resultMap="memberMapper.mypetResultSet" ofType="MyPet"/>
+	</resultMap>
+	
+	<insert id="insetMatch">
+		INSERT INTO MATCH VALUES(SEQ_MCOUNT.NEXTVAL, #{memberId}, #{matchCate},
+								 #{matchTitle}, #{matchContent}, SYSDATE, DEFAULT)
+	</insert>
+	
+	<insert id="insertMatchPet">
+		INSERT ALL
+			<foreach collection="list" item="p">
+				INTO MATCH_PET VALUES(SEQ_MCOUNT.CURRVAL, #{p.petNum})
+			</foreach>
+		SELECT * FROM DUAL
+	</insert>
+	
+	<select id="getFindMatchListCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM MATCH
+		WHERE MATCH_CATE = #{cate} AND STATUS = 'Y'
+	</select>
+	
+	<select id="selectFindMatchList" resultMap="matchResultSet">
+		SELECT MC.*, M.NICKNAME, M.SIGUNGU_NAME, M.SIDO_NAME, M.DONG_NAME, MP.*, MPF.CHANGE_NAME, MM.STATUS MATCH_STATUS
+		FROM MATCH MC
+		     JOIN MEMBER M ON(M.MEMBER_ID = MC.MEMBER_ID)
+		     JOIN MATCH_PET MCP ON(MCP.MATCH_NUM = MC.MATCH_NUM)
+		     JOIN MYPET MP ON(MP.PET_NUM = MCP.PET_NUM)
+		     JOIN MYPET_FILE MPF ON(MPF.PET_NUM = MP.PET_NUM)
+		     LEFT JOIN MATCH_MEMBER MM ON(MC.MATCH_NUM = MM.MATCH_NUM AND MM.STATUS = 'Y')
+		WHERE MATCH_CATE = #{cate} AND MC.STATUS = 'Y' AND MP.MEMBER_ID = MC.MEMBER_ID
+		ORDER BY MC.MATCH_NUM DESC
+	</select>
+	
+	<select id="selectMatchDetail" resultMap="matchResultSet">
+		SELECT MC.*, M.NICKNAME, M.SIGUNGU_NAME, M.SIDO_NAME, M.DONG_NAME, MP.*, MPF.CHANGE_NAME
+		FROM MATCH MC
+		     JOIN MEMBER M ON(M.MEMBER_ID = MC.MEMBER_ID)
+		     JOIN MATCH_PET MCP ON(MCP.MATCH_NUM = MC.MATCH_NUM)
+		     JOIN MYPET MP ON(MP.PET_NUM = MCP.PET_NUM)
+		     JOIN MYPET_FILE MPF ON(MPF.PET_NUM = MP.PET_NUM)
+		WHERE MC.MATCH_NUM = #{mcNum} AND MP.MEMBER_ID = MC.MEMBER_ID
+	</select>
+	
+	<select id="selectMatchCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM MATCH_MEMBER
+		WHERE MATCH_NUM = #{matchNum}
+	</select>
+	
+	<update id="updateMatch">
+		UPDATE MATCH SET 
+			   MATCH_TITLE = #{matchTitle}, MATCH_CONTENT = #{matchContent}, MATCH_DATE = SYSDATE
+		WHERE MATCH_NUM = #{matchNum} AND MEMBER_ID = #{memberId}
+	</update>
+	
+	<delete id="deleteMatchPet">
+		DELETE FROM MATCH_PET
+		WHERE MATCH_NUM = #{matchNum}
+	</delete>
+	
+	<insert id="updateMatchPet">
+		INSERT ALL
+			<foreach collection="petList" item="p">
+				INTO MATCH_PET VALUES(#{matchNum}, #{p.petNum})
+			</foreach>
+		SELECT * FROM DUAL
+	</insert>
+	
+	<update id="deleteMatch">
+		UPDATE MATCH SET
+			STATUS = 'N'
+		WHERE MATCH_NUM = #{matchNum}
+	</update>
+	
+	<update id="deleteMatchMember">
+		UPDATE MATCH_MEMBER SET STATUS = 'D'
+		WHERE MATCH_NUM = #{matchNum}
+	</update>
+	
+	<insert id="insertMatchMember">
+		INSERT INTO MATCH_MEMBER VALUES(#{matchNum}, #{memberId}, #{mContent}, SYSDATE, DEFAULT)
+	</insert>
+	
+	<insert id="insertMatchMemberPet">
+		INSERT ALL
+			<foreach collection="petNum" item="pNum">
+				INTO MATCH_PET VALUES(#{matchNum}, #{pNum})
+			</foreach>
+		SELECT * FROM DUAL
+	</insert>
+	
+	<select id="searchMatchMember" resultType="_int">
+		SELECT COUNT(*)
+		FROM MATCH_MEMBER
+		WHERE MATCH_NUM = #{matchNum} AND MEMBER_ID = #{memberId}
+	</select>
+	
+	<resultMap type="MatchMember" id="matchMemberResultSet">
+		<result property="matchCate" column="MATCH_CATE"/>
+		<result property="matchContent" column="MATCH_CONTENT"/>
+		<result property="mDate" column="M_DATE"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="nickName" column="NICKNAME"/>
+	</resultMap>
+	
+	<resultMap type="Match" id="matchResultSet2">
+		<id property="matchNum" column="MATCH_NUM"/>
+		<result property="matchCate" column="MATCH_CATE"/>
+		<result property="matchTitle" column="MATCH_TITLE"/>
+		<result property="matchDate" column="MATCH_DATE"/>
+		
+		<collection property="mList" javaType="arraylist" resultMap="matchMemberResultSet" ofType="MatchMember"/>
+	</resultMap>
+	
+	<select id="selectPMatchList" resultMap="matchResultSet2">
+		SELECT MC.MATCH_NUM, MC.MATCH_CATE, MC.MATCH_TITLE, MC.MATCH_DATE, MCM.MATCH_CONTENT, MCM.M_DATE, M.MEMBER_ID, M.NICKNAME, MF.CHANGE_NAME
+		FROM MATCH MC
+		     JOIN MATCH_MEMBER MCM ON(MC.MATCH_NUM = MCM.MATCH_NUM)
+		     JOIN MEMBER M ON(MCM.MEMBER_ID = M.MEMBER_ID)
+		     LEFT JOIN MEMBER_PROFILE MF ON(M.MEMBER_ID = MF.MEMBER_ID)
+		WHERE MC.MEMBER_ID = #{id} AND MC.STATUS = 'Y' AND MCM.STATUS = #{status}
+		ORDER BY MC.MATCH_CATE, MC.MATCH_NUM DESC, M_DATE
+	</select>
+	
+	<select id="selectMatchInfo" resultMap="memberMapper.mypetResultSet">
+		SELECT *
+		FROM MATCH MC
+		     JOIN MATCH_PET MCP ON(MC.MATCH_NUM = MCP.MATCH_NUM)
+		     JOIN MYPET MP ON(MCP.PET_NUM = MP.PET_NUM)
+     		 JOIN MYPET_FILE MPF ON(MP.PET_NUM = MPF.PET_NUM)
+		WHERE MC.MATCH_NUM = #{mcNum} AND MP.MEMBER_ID = #{id}
+	</select>
+	
+	<select id="selectMatchPetList" resultMap="memberMapper.mypetResultSet">
+		SELECT MP.*, MPF.CHANGE_NAME
+		FROM MATCH MC
+		     LEFT JOIN MATCH_PET MCP ON(MC.MATCH_NUM = MCP.MATCH_NUM)
+		     JOIN MYPET MP ON(MCP.PET_NUM = MP.PET_NUM)
+		     JOIN MYPET_FILE MPF ON(MP.PET_NUM = MPF.PET_NUM)
+		WHERE MC.MATCH_NUM = #{matchNum} AND MP.MEMBER_ID = #{id}
+	</select>
+	
+	<update id="acceptMatch">
+		UPDATE MATCH_MEMBER SET STATUS = 'Y'
+		WHERE MATCH_NUM = #{matchNum} AND MEMBER_ID = #{memberId}
+	</update>
+	
+	<update id="rejectOtherMatch">
+		UPDATE MATCH_MEMBER SET STATUS = 'N'
+		WHERE MATCH_NUM = #{matchNum} AND MEMBER_ID != #{memberId}
+	</update>
+	
+	<update id="rejectMatch">
+		UPDATE MATCH_MEMBER SET STATUS = 'N'
+		WHERE MATCH_NUM = #{matchNum} AND MEMBER_ID = #{memberId}
+	</update>
+	
+	<resultMap type="MatchChat" id="matchchatResultSet">
+		<result property="sendId" column="SEND_ID"/>
+		<result property="sendNickName" column="SNICKNAME"/>
+		<result property="receiveId" column="RECEIVE_ID"/>
+		<result property="receiveNickName" column="RNICKNAME"/>
+		<result property="chatContent" column="CHAT_CONTENT"/>
+		<result property="chatDate" column="CHAT_DATE"/>
+		<result property="chatNum" column="CHAT_NUM"/>
+		
+		<collection property="unReadId" javaType="arraylist" ofType="string">
+			<id column="UNREAD_ID"/>
+		</collection>
+	</resultMap>
+	
+	<select id="selectChatLog" resultMap="matchchatResultSet">
+		<![CDATA[
+		SELECT SEND_ID, SNICKNAME, RECEIVE_ID, RNICKNAME, CHAT_CONTENT, CHAT_DATE, CHAT_NUM, UNREAD_ID
+		FROM (
+		        SELECT ROWNUM RNUM, CHAT.*
+		        FROM(
+		            SELECT MCL.SEND_ID, M1.NICKNAME SNICKNAME, MCL.RECEIVE_ID, M2.NICKNAME RNICKNAME, MCL.CHAT_CONTENT, MCL.CHAT_DATE, MCL.CHAT_NUM, MCU.UNREAD_ID
+		            FROM MATCH_CHATLOG MCL
+		                 JOIN MEMBER M1 ON(M1.MEMBER_ID = MCL.SEND_ID)
+		                 JOIN MEMBER M2 ON(M2.MEMBER_ID = MCL.RECEIVE_ID)
+		                 LEFT JOIN MATCH_CHATLOG_UNREAD MCU ON(MCL.CHAT_NUM = MCU.CHAT_NUM)
+		            WHERE MCL.MATCH_NUM = #{matchNum}
+		                  AND (MCL.SEND_ID IN(#{id1}, #{id2}) 
+		                  OR MCL.RECEIVE_ID IN(#{id1}, #{id2})) 
+		                  AND MCL.CHAT_NUM >= CASE WHEN 
+		                                      (SELECT MIN(CHAT_NUM)
+		                                       FROM (SELECT MCL.CHAT_NUM, MCU.UNREAD_ID
+		                                             FROM MATCH_CHATLOG MCL
+		                                                  LEFT JOIN MATCH_CHATLOG_UNREAD MCU ON(MCL.CHAT_NUM = MCU.CHAT_NUM)
+		                                             WHERE MATCH_NUM = #{matchNum} AND (MCL.SEND_ID IN(#{id1}, #{id2}) 
+		                                                                  OR MCL.RECEIVE_ID IN(#{id1}, #{id2})))
+		                                       WHERE UNREAD_ID = #{id1}) IS NULL 
+		                                       THEN 
+		                                       (SELECT CHAT_NUM
+                                                FROM (
+                                                        SELECT CHAT_NUM
+                                                        FROM (
+                                                                SELECT CHAT_NUM
+                                                                FROM MATCH_CHATLOG
+                                                                WHERE CHAT_NUM <= (SELECT MAX(CHAT_NUM)
+                                                                                   FROM MATCH_CHATLOG
+                                                                                   WHERE MATCH_NUM = #{matchNum} AND (MATCH_CHATLOG.SEND_ID IN(#{id1}, #{id2}) 
+                                                                                                        OR MATCH_CHATLOG.RECEIVE_ID IN(#{id1}, #{id2})))
+                                                                                                        AND ROWNUM <= 20
+                                                                ORDER BY CHAT_NUM DESC
+                                                             )
+                                                        ORDER BY CHAT_NUM
+                                                )
+                                                WHERE ROWNUM = 1) 
+		                                       ELSE 
+		                                       (SELECT CHAT_NUM
+                                                FROM (
+                                                        SELECT CHAT_NUM
+                                                        FROM (
+                                                                SELECT CHAT_NUM
+                                                                FROM MATCH_CHATLOG
+                                                                WHERE CHAT_NUM <= (
+                                                                                    SELECT MIN(MCU.CHAT_NUM)
+                                                                                    FROM MATCH_CHATLOG_UNREAD MCU
+                                                                                         LEFT JOIN MATCH_CHATLOG MCL ON(MCL.CHAT_NUM = MCU.CHAT_NUM)
+                                                                                    WHERE MATCH_NUM = #{matchNum}  AND (MCL.SEND_ID IN(#{id1}, #{id2}) 
+                                                                                                          OR MCL.RECEIVE_ID IN(#{id1}, #{id2})) AND UNREAD_ID = #{id1}
+                                                                                  )
+                                                                      AND ROWNUM <= 20
+                                                                ORDER BY CHAT_NUM DESC
+                                                             )
+                                                        ORDER BY CHAT_NUM
+                                                    )
+                                                WHERE ROWNUM = 1) END
+		            ORDER BY MCL.CHAT_DATE DESC, MCL.CHAT_NUM DESC
+		            ) CHAT
+		      )
+		]]>
+	</select>
+	
+	<select id="selectAppendChatLog" resultMap="matchchatResultSet">
+		SELECT SEND_ID, SNICKNAME, RECEIVE_ID, RNICKNAME, CHAT_CONTENT, CHAT_DATE, CHAT_NUM, UNREAD_ID
+		FROM (
+		        SELECT ROWNUM RNUM, CHAT.*
+		        FROM (
+		                SELECT MCL.SEND_ID, M1.NICKNAME SNICKNAME, MCL.RECEIVE_ID, M2.NICKNAME RNICKNAME, MCL.CHAT_CONTENT, MCL.CHAT_DATE, MCL.CHAT_NUM, MCU.UNREAD_ID
+		                FROM MATCH_CHATLOG MCL
+		                     JOIN MEMBER M1 ON(M1.MEMBER_ID = MCL.SEND_ID)
+		                     JOIN MEMBER M2 ON(M2.MEMBER_ID = MCL.RECEIVE_ID)
+		                     LEFT JOIN MATCH_CHATLOG_UNREAD MCU ON(MCL.CHAT_NUM = MCU.CHAT_NUM)
+		                WHERE MCL.MATCH_NUM = #{matchNum}
+		                      AND (MCL.SEND_ID IN(#{sendId}, #{receiveId}) 
+		                      OR MCL.RECEIVE_ID IN(#{sendId}, #{receiveId}))
+<!-- 		                      <if test='append == "l"'> -->
+<!-- 								<![CDATA[AND MCL.CHAT_NUM > #{chatNum}  ]]> -->
+<!-- 								ORDER BY MCL.CHAT_DATE, MCL.CHAT_NUM  -->
+<!-- 			                  </if> -->
+			                  <if test='append == "f"'>
+					            <![CDATA[AND MCL.CHAT_NUM < #{chatNum}  ]]>
+					            ORDER BY MCL.CHAT_DATE DESC, MCL.CHAT_NUM DESC
+			                  </if>
+				              
+		            ) CHAT
+		    )
+		 <![CDATA[WHERE RNUM <= 20]]>
+		
+	</select>
+	
+	<select id="selectRMatchList" resultMap="matchResultSet">
+		SELECT MC.MATCH_NUM, MC.MATCH_CATE, MC.MATCH_TITLE, MC.MATCH_DATE, MCM.M_DATE, M.MEMBER_ID, M.NICKNAME, MF.CHANGE_NAME
+		FROM MATCH_MEMBER MCM
+		     JOIN MATCH MC ON(MCM.MATCH_NUM = MC.MATCH_NUM)
+		     JOIN MEMBER M ON(MC.MEMBER_ID = M.MEMBER_ID)
+		     LEFT JOIN MEMBER_PROFILE MF ON(M.MEMBER_ID = MF.MEMBER_ID)
+		WHERE MCM.MEMBER_ID = #{id} AND MC.STATUS = 'Y' AND MCM.STATUS = #{status}
+		ORDER BY MC.MATCH_CATE, MC.MATCH_NUM DESC, MCM.M_DATE
+	</select>
+	
+	<insert id="insertMatchMessage">
+		INSERT INTO MATCH_CHATLOG VALUES(#{matchNum}, #{sendId}, #{receiveId}, #{chatContent}, #{chatDate}, SEQ_MCHATCOUNT.NEXTVAL)
+	</insert>
+	
+	<insert id="insertUnReadId">
+		INSERT ALL
+			<foreach collection="unReadId" item="u">
+				INTO MATCH_CHATLOG_UNREAD VALUES(SEQ_MCHATCOUNT.CURRVAL, #{u})
+			</foreach>
+		SELECT * FROM DUAL
+	</insert>
+	
+	<select id="selectMessageNum" resultType="_int">
+		SELECT SEQ_MCHATCOUNT.CURRVAL
+		FROM DUAL
+	</select>
+	
+	<delete id="deleteUnReadId">
+		<![CDATA[
+		DELETE FROM MATCH_CHATLOG_UNREAD
+		WHERE UNREAD_ID = #{sendId} AND CHAT_NUM IN (SELECT CHAT_NUM
+		                                             FROM MATCH_CHATLOG
+		                                             WHERE MATCH_NUM = #{matchNum} AND CHAT_NUM = #{chatNum})
+		]]>
+	</delete>
+	
+	<select id="getUnReadCount" resultMap="matchchatResultSet">
+		<![CDATA[
+		SELECT MCL.CHAT_NUM, MCU.UNREAD_ID
+		FROM MATCH_CHATLOG MCL
+			 LEFT JOIN MATCH_CHATLOG_UNREAD MCU ON(MCL.CHAT_NUM = MCU.CHAT_NUM)
+		WHERE MCL.MATCH_NUM = #{matchNum} AND (MCL.SEND_ID IN(#{sendId}, #{receiveId}) OR MCL.RECEIVE_ID IN(#{sendId}, #{receiveId})) AND MCL.CHAT_NUM <= #{chatNum}
+		ORDER BY CHAT_NUM DESC
+		]]>
+	</select>
+	
+	<select id="selectMainCoupleMatchList" resultMap="matchResultSet">
+		<![CDATA[
+		SELECT MC.*
+		FROM (SELECT MC.*, MPF.CHANGE_NAME
+        		 FROM MATCH MC
+	             JOIN MEMBER M ON(M.MEMBER_ID = MC.MEMBER_ID)
+	             JOIN MATCH_PET MCP ON(MCP.MATCH_NUM = MC.MATCH_NUM)
+	             JOIN MYPET MP ON(MP.PET_NUM = MCP.PET_NUM)
+	             JOIN MYPET_FILE MPF ON(MPF.PET_NUM = MP.PET_NUM)
+             WHERE MATCH_CATE = 1 AND MC.STATUS = 'Y' AND MP.MEMBER_ID = MC.MEMBER_ID
+        	 ORDER BY MC.MATCH_NUM DESC) MC
+        WHERE ROWNUM <= 5
+		]]>
+	</select>
+	
+	<select id="selectMainWalkMatchList" resultMap="matchResultSet">
+		<![CDATA[
+		SELECT MC.*
+		FROM (SELECT MC.*, MPF.CHANGE_NAME
+		         FROM MATCH MC
+	             JOIN MEMBER M ON(M.MEMBER_ID = MC.MEMBER_ID)
+	             JOIN MATCH_PET MCP ON(MCP.MATCH_NUM = MC.MATCH_NUM)
+	             JOIN MYPET MP ON(MP.PET_NUM = MCP.PET_NUM)
+	             JOIN MYPET_FILE MPF ON(MPF.PET_NUM = MP.PET_NUM)
+       		 WHERE MATCH_CATE = 2 AND MC.STATUS = 'Y' AND MP.MEMBER_ID = MC.MEMBER_ID
+      	     ORDER BY MC.MATCH_NUM DESC) MC
+        WHERE ROWNUM <= 5
+		]]>
+	</select>
+	
+	<select id="selectMatchYCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM MATCH_MEMBER
+		WHERE MATCH_NUM = #{matchNum} AND STATUS = 'Y'
+	</select>
+	
+	<select id="selectMMatchList" resultMap="matchResultSet">
+		SELECT *
+		FROM MATCH
+		WHERE STATUS = 'Y'
+		ORDER BY MATCH_NUM DESC
+	</select>
+	
+	<select id="getAllMatchListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM MATCH
+		WHERE STATUS = 'Y'
+	</select>
+	
+	<select id="selectMatchContent" resultType="string">
+		SELECT MATCH_CONTENT
+		FROM MATCH_MEMBER
+		WHERE MATCH_NUM = #{matchNum} AND MEMBER_ID = #{id}
+	</select>
+	
+	<update id="updateMatchMemberSuccess">
+		UPDATE MATCH_MEMBER SET STATUS = 'S'
+		WHERE MATCH_NUM = #{matchNum} AND MEMBER_ID = #{memberId}
+	</update>
+	
+	<update id="updateMatchSuccess">
+		UPDATE MATCH SET STATUS = 'S'
+		WHERE MATCH_NUM = #{matchNum}
+	</update>
+	
+	<select id="getInfoMatchListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM MATCH
+		WHERE STATUS = 'Y' AND MATCH_CATE = #{cate} AND MEMBER_ID = #{infoId}
+	</select>
+	
+	<select id="selectInfoMatchList" resultMap="matchResultSet">
+		SELECT MC.*, M.NICKNAME, M.SIGUNGU_NAME, M.SIDO_NAME, M.DONG_NAME, MP.*, MPF.CHANGE_NAME, MM.STATUS MATCH_STATUS
+		FROM MATCH MC
+		     JOIN MEMBER M ON(M.MEMBER_ID = MC.MEMBER_ID)
+		     JOIN MATCH_PET MCP ON(MCP.MATCH_NUM = MC.MATCH_NUM)
+		     JOIN MYPET MP ON(MP.PET_NUM = MCP.PET_NUM)
+		     JOIN MYPET_FILE MPF ON(MPF.PET_NUM = MP.PET_NUM)
+		     LEFT JOIN MATCH_MEMBER MM ON(MC.MATCH_NUM = MM.MATCH_NUM AND MM.STATUS = 'Y')
+		WHERE MATCH_CATE = #{cate} AND MC.STATUS = 'Y' AND MP.MEMBER_ID = MC.MEMBER_ID AND MC.MEMBER_ID = #{infoId}
+		ORDER BY MC.MATCH_NUM DESC
+	</select>
+	
+</mapper>

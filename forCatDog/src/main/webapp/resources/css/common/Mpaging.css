@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+.pagingArea .border{
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;	
+	outline: none;
+	border: 1px solid #ebebeb;
+	background-color: white;
+	color: black;
+	font-size: 15px;
+	margin-bottom: 10px;
+}
+.pagingArea .num{
+	margin-top: 20px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;	
+	outline: none;
+	border: none;
+	font-size: 20px;
+	color: #363636;
+	margin-left: -3px;
+	background-color: #f7f7fc;
+}
+.pagingArea .first{
+	color: #c7c7c7;
+}
+.pagingArea .last{
+	color: #c7c7c7;
+}
+.pagingArea .selected{
+	color: red;
+}
+.pointer{
+	cursor: pointer;
+}
+button .first{
+	text-align: center;
+}
+i{
+	margin-left: -20px;
+}

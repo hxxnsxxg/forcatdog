@@ -1,0 +1,39 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'InfinitySans-RegularA1';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+	font-family: 'InfinitySans-RegularA1';
+}
+table{
+	text-align:center;
+	font-size: 20px;
+	font-weight:bold;
+}
+
+#checkbtn{
+	width: 92px;
+    height: 30px;
+    background: sandybrown;
+    font-weight: bold;
+    color: white;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor:pointer;
+}
+
+#cbtn{
+	width: 92px;
+    height: 30px;
+    background: dimgray;
+    font-weight: bold;
+    color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor:pointer;
+}

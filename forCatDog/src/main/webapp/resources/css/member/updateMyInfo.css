@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+.paddingdiv {
+	position: relative;
+	padding: 100px;
+	padding-top: 20px;
+}
+
+.input {
+	border: none;
+	outline:none;
+	cursor: pointer;
+	font-size: 20px;
+	width: 170px;
+}
+
+#checkNickname, #updatePw {
+	border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    width: 130px;
+    height: 35px;
+    background: #ece6e6;
+    border-radius: 10px;
+}
+
+.birth{
+	border: none;
+	outline:none;
+	cursor: pointer;
+	font-size: 20px;
+	width: 100px;
+}
+
+#pwAns{
+	margin-left: 125px;
+    width: 350px;
+    font-weight: bold;
+    color: gray;
+}
+
+.inputShort{
+	border: none;
+	outline:none;
+	cursor: pointer;
+	font-size: 20px;
+	width: 120px;
+}
+
+#myinfotable {
+	width: 90%;
+	text-align: center;
+	border-collapse: collapse;
+	margin-top: 40px;
+	margin-bottom: 20px;
+}
+
+#myinfotable tr {
+	height: 70px;
+	border-top: 2px solid gray;
+	border-bottom: 2px solid gray;
+}
+#myinfotable th {
+	width: 20%;
+	font-size: 20px;
+}
+
+#myinfotable td {
+	width: 70%;
+	font-size: 20px;
+}
+
+#updatebtn {
+	float: right;
+    margin-top: 20px;
+    margin-right: 5%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    width: 150px;
+    height: 50px;
+    background: none;
+    color: gray;
+    border-radius: 10px;
+}

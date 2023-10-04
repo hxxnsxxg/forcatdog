@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="messageMapper">
+	
+	<select id="getMessageListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM MESSAGE
+		WHERE NOT STATUS = 'D' AND MEMBER_ID = #{loginId}
+	</select>
+	
+	<resultMap type="Message" id="messageResultSet">
+		<id property="mNum" column="MESSAGE_NUM"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="sendId" column="SEND_ID"/>
+		<result property="sendNickName" column="NICKNAME"/>
+		<result property="mContent" column="MESSAGE_CONTENT"/>
+		<result property="sendDate" column="SEND_DATE"/>
+		<result property="status" column="STATUS"/>
+	</resultMap>
+	
+	<select id="selectMessageList" resultMap="messageResultSet">
+		SELECT MS.*, M.NICKNAME
+		FROM MESSAGE MS
+			 JOIN MEMBER M ON(MS.SEND_ID = M.MEMBER_ID)
+		WHERE NOT MS.STATUS = 'D' AND MS.MEMBER_ID = #{loginId}
+		ORDER BY MS.MESSAGE_NUM DESC
+	</select>
+	
+	<resultMap type="Member" id="memberResultSet">
+		<id property="id" column="MEMBER_ID"/>
+		<result property="nickName" column="NICKNAME"/>
+		<result property="changeFileName" column="CHANGE_NAME"/>
+	</resultMap>
+	
+	<select id="searchUser" resultMap="memberResultSet">
+		<![CDATA[
+		SELECT MEMBER_ID, NICKNAME, CHANGE_NAME
+		FROM MEMBER
+			 LEFT JOIN MEMBER_PROFILE USING(MEMBER_ID)
+		WHERE STATUS = 'Y' AND NICKNAME LIKE '%' || #{keyword} || '%' AND ROWNUM <= 5
+		]]>
+	</select>
+	
+	<insert id="sendMessage">
+		INSERT INTO MESSAGE VALUES(SEQ_MECOUNT.NEXTVAL, #{memberId}, #{sendId}, #{mContent}, SYSDATE, DEFAULT)
+	</insert>
+	
+	<select id="getUserListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE STATUS = 'Y' AND NICKNAME LIKE '%' || #{keyword} || '%'
+	</select>
+	
+	<select id="searchUserList" resultMap="memberResultSet">
+		SELECT MEMBER_ID, NICKNAME, CHANGE_NAME
+		FROM MEMBER
+			 LEFT JOIN MEMBER_PROFILE USING(MEMBER_ID)
+		WHERE STATUS = 'Y' AND NICKNAME LIKE '%' || #{keyword} || '%'
+	</select>
+	
+	<update id="updateMessageStatus">
+		UPDATE MESSAGE SET STATUS = 'Y'
+		WHERE MEMBER_ID = #{memberId} AND MESSAGE_NUM = #{mNum}
+	</update>
+	
+	<select id="selectMessage" resultMap="messageResultSet">
+		SELECT MS.*, M.NICKNAME
+		FROM MESSAGE MS
+			 JOIN MEMBER M ON(MS.SEND_ID = M.MEMBER_ID)
+		WHERE NOT MS.STATUS = 'D' AND MS.MEMBER_ID = #{memberId} AND MS.MESSAGE_NUM = #{mNum}
+	</select>
+	
+	<update id="deleteMessage">
+		UPDATE MESSAGE SET STATUS = 'D'
+		WHERE MEMBER_ID = #{memberId} AND MESSAGE_NUM IN (
+			<foreach collection="list" separator=", " item="item">
+				#{item}
+			</foreach>
+		)
+	</update>
+	
+	<select id="selectNReadCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM MESSAGE
+		WHERE MEMBER_ID = #{id} AND STATUS = 'N'
+	</select>
+
+</mapper>

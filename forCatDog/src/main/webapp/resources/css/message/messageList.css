@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'InfinitySans-RegularA1';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+	font-family: 'InfinitySans-RegularA1';
+}
+
+h2 {
+	text-align: center;
+}
+
+button {
+	border-radius: 4px;
+	border:solid 1px #ccc;
+	font-size:12px;
+	width:92px;
+	height: 30px;
+	background: #f0584b;
+	color: white;
+	cursor: pointer;
+}
+
+#sendBtn {
+	background: #767676;
+	cursor: pointer;
+}
+
+.btnArea {
+	float: right;
+	display: inline-block;
+}
+
+#messageTable {
+	text-align: center;
+	width: 100%;
+	white-space: nowrap;	
+}
+
+table td {
+	height: 19px;
+	font-size: 15px;
+}
+
+#messageTable tr:nth-child(n + 2):hover {
+	cursor: pointer;
+	background-color: lightgray;
+}
+
+#messageTable td:nth-child(3) div {
+	text-align: left;
+	width: 200px;
+	overflow: hidden;
+ 	text-overflow: ellipsis;
+}

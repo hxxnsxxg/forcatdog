@@ -1,0 +1,102 @@
+@charset "UTF-8";
+
+#content {
+   min-height: 800px;
+   width: 1200px;
+}
+
+#name{
+	width: 790px;
+	font-size:35px;
+	font-weight:bold;
+	background: #F2EBEB;
+	border: 1px solid gray;
+}
+
+#name > hr{
+	border: 1px solid lightgray;
+}
+
+#content1, #type1{
+	font-size:20px;
+	font-weight:bold;
+}
+
+#list{
+	font-weight: bold;
+    background: #F2EBEB;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 2px solid #F2EBEB;
+    width: 100px;
+    height: 40px;
+    position: relative;
+    margin-left: 580px;
+    margin-top: 20px;
+    cursor:pointer;
+    margin-bottom: 3%;
+	outline:none;
+}
+
+#write{
+	font-weight: bold;
+    background: #b3d9ff;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 2px solid #b3d9ff;
+    width: 100px;
+    height: 40px;
+    position: relative;
+    margin-left: 10px;
+    margin-top: 20px;
+    cursor:pointer;
+}
+
+
+#btn {
+	font-weight: bold;
+    background: lightyellow;
+    font-size: 15px;
+    border-radius: 5px;
+    border: 2px solid lightgray;
+    width: 70px;
+    height: 30px;
+}
+
+#content5{
+	position: relative;
+    margin-left: 900px;
+    margin-top: 250px;
+}
+
+#personality, #explain{
+	width: 790px;
+    height: 150px;
+    font-size: 20px;
+    font-weight:bold;
+    resize: none;
+}
+
+#detail{
+	width:800px;
+}
+
+#contentImg1, #contentImg2{
+	position: relative;
+    margin-left: 130px;
+	width: 200px;
+	height:200px;
+	border: 2px dotted gray;
+}
+
+#catdogType{
+	font-size:20px;
+	font-weight:bold;
+	width:300px;
+}
+#text{
+	font-size:20px;
+	font-weight:bold;
+	width:292px;
+}
+

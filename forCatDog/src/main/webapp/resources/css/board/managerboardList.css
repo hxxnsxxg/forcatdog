@@ -1,0 +1,102 @@
+.mBoard {
+	width: 50%;
+	margin-left: 0px;
+	margin-right: 100px;
+	font-size: 20px;
+}
+
+.mBoard button {
+	font-weight: bold;
+    font-size: 15px;
+    background: #F2EBEB;
+    border: #F2EBEB;
+    border-radius: 5px;
+    width: 55px;
+    height: 35px;
+    ourline: none;
+    cursor: pointer;
+    outline: none;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+caption {
+	display: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+.board_list_wrap {
+	width: 100%;
+	padding: 50px;
+}
+
+.board_list {
+	width: 100%;
+	border-top: 4px solid lightgray;
+}
+
+.board_list tr {
+	border-bottom: 1px solid #ccc;
+}
+
+.board_list th, .board_list td {
+	padding: 10px;
+	font-size: 15px;
+}
+
+.board_list thead * {
+	text-align: center;
+	background-color: #E4EAF8;
+    border-top: 2px solid #1A90D8;
+    border-bottom: 1px solid lightgray;
+}
+
+.board_list tbody * {
+	text-align: center;
+}
+
+.board_list tbody tr td:nth-child(2) {
+	text-align: left;
+}
+
+.board_list tbody tr td div div:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#goWrite {
+	width: 110px;
+	margin-left: 90%;
+	background: #1a8cff;
+	font-size: 25px;
+	color: white;
+	font-weight: bold;
+	border: #1a8cff; 
+	border-radius: 5px;
+	outline: none;
+	cursor: pointer;
+}
+
+#op{
+	height: 35px;
+}
+
+#searchWord{
+	height: 30px;
+    width: 200px;
+}
+
+#searchWordA{
+	height: 30px;
+    margin-top: 40px;
+    width: 200px;
+}
+
+#searchA {
+	font-size: 18px;
+}

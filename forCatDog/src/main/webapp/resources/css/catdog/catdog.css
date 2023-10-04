@@ -1,0 +1,244 @@
+@charset "UTF-8";
+
+#content {
+   min-height: 800px;
+   width: 1200px;
+}
+
+#return{
+	cursor: pointer;
+	color: gray;
+	font-size: 35px;
+	font-weight: bold;
+	margin-left: 50px;
+	margin-top: 100px;
+}
+
+#returnA{
+	cursor: pointer;
+	color: gray;
+	font-size: 25px;
+	font-weight: bold;
+	margin-left: 50px;
+	margin-top: 50px;
+}
+
+#returnB{
+	cursor: pointer;
+	color: gray;
+	font-size: 25px;
+	font-weight: bold;
+	margin-left: 200px;
+}
+
+#exclamation{
+	margin-left: 13%;
+	color: #ffdb4d;
+}
+
+#exclamationA{
+	color: #ffdb4d;
+}
+
+#empty {
+	font-weight: bold;
+	font-size: 40px;
+	margin-top: 15%;
+	margin-left: 40%;
+}
+
+#emptyS {
+	font-weight: bold;
+	font-size: 30px;
+	margin-top: 5%;
+	margin-left: 40%;
+}
+
+#gogo {
+	border: none;
+	outline: none;
+	background: white;
+}
+
+.cdFormA {
+	padding-top: 2%;
+	float: left;
+}
+
+#animal{
+	font-weight:bold;
+	background: #F2EBEB;
+	font-size: 20px;
+	border-radius: 5px;
+	border: 2px solid lightgray;
+	outline:none;
+}
+
+.cdForm {
+	padding-top: 2%;
+}
+
+#search{
+	font-weight: bold;
+    background: #F2EBEB;
+    font-size: 20px;
+    border-radius: 5px;
+    border: 2px solid lightgray;
+    height: 35px;
+    outline: none;
+    cursor: pointer;
+}
+
+#btn{
+	font-weight: bold;
+    background: #F2EBEB;
+    font-size: 20px;
+    border-radius: 5px;
+    border: 2px solid lightgray;
+    cursor: pointer;
+    margin-left: 77%;
+    width: 150px;
+    margin-top: 10px;
+}
+
+#searchWord {
+	height: 30px;
+    margin-top: 40px;
+    width: 250px;
+}
+
+#searchDiv {
+	display: inline-block;
+	position: relative;
+	bottom: 0px;
+	left: 0px;
+	
+	height: 30px;
+    margin-top: 40px;
+    margin-left: 4%;
+}
+
+#resultDiv {
+	display: none;
+	position: absolute;
+	top: 75px;
+	width: 256px;
+	background: white;
+	border: 1px solid gray;
+}
+
+.result {
+	height: 26px;
+	padding-top: 3px;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 15px;
+}
+
+.result:hover {
+	background-color: lightgray;
+	cursor: pointer;
+}
+
+#searchmenu{
+	text-align:center;
+}
+
+#searchOption{
+	font-size: 24px;
+	border-radius: 5px;
+	border: 2px solid lightgray;
+}
+
+#text{
+	font-size:24px;
+	background: white;
+	border: 0px solid white;
+	outline:none;
+}
+
+#type{
+	position: relative;
+    font-size: 30px;
+    margin-top: 70px;
+    font-weight: bold;
+}
+
+#catdog{
+	display:block;
+	text-align: center;
+}
+
+#catdogS{
+	display:block;
+	width: 100%;
+	min-height: 300px;
+    padding-bottom: 4%;
+}
+
+.catdogitemS{
+	cursor: pointer;
+    float: left;
+    margin-left: 100px;
+}
+
+.catdogitemS img{
+	width: 200px;
+    height: 200px;
+    margin-top: 30px;
+    border: 1px solid #fffcf5;
+    border-radius: 15px;
+    margin-left: 20px;
+}
+
+.catdogitemS p{
+	font-weight: bold;
+	font-size: 20px;
+	text-align: center;
+}
+
+.catdogitem{
+	display: inline-block;
+	cursor: pointer;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 30px;
+}
+
+.catdogitem *{
+/* 	display: block; */
+    font: caption !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+}
+
+.catdogitem p{
+	font-weight: bold;
+	font-size: 20px;
+	text-align: center;
+}
+
+#paging {
+	display: block;
+	float: none;
+}
+
+.pagingArea {
+	margin-top: 3%;
+	margin-bottom: 3%;
+	align: center;
+}
+
+.petImgArea {
+   width: 240px;
+   height: 240px; 
+   border-radius: 25%;
+   overflow: hidden;
+   cursor: pointer;
+}
+
+.petImg {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;	
+}

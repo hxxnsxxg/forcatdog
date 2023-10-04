@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+.paddingdiv {
+	padding: 50px;
+}
+
+.paddingdiv * {
+	display: inline-block;
+}
+
+.block {
+	position: relative;
+	display: block;
+	margin-bottom: 40px;
+}
+
+#line {
+	height: 5px;
+    display: block !important;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    margin-left: -20px;
+    margin-right: -20px;
+    background: #F2EBEB;
+    border: none;
+}
+
+#insertPetBtn {
+	float: right;
+    width: 90px;
+    height: 40px;
+    margin-left: 20px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background: #F2EBEB;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.pet {
+    display: inline-block;
+    width: 200px;
+    margin-top: 20px;
+    margin-right: 70px;
+    cursor: pointer;
+}
+
+.pet * {
+   display: block;
+   text-align: center;
+}
+
+.petImgArea {
+   width: 125px;
+   height: 125px; 
+   border-radius: 25%;
+   overflow: hidden;
+   cursor: pointer;
+}
+
+.petImg {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;	
+}
+
+.pet span{
+   font-weight: bold;
+   color: black;
+   font-size: 20px;
+}
+
+.pet p {
+   font-size: 18px;
+   font-weight: bold;
+}
+
+/* .pet:nth-child(n + 2) { */
+/*    margin-left: 20px; */
+/* } */
+
+.pagingArea {
+	text-align: center;
+	width: 100%;
+}

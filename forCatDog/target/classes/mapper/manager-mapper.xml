@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="managerMapper">
+	<select id="getReportListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM REPORT
+	</select>
+	
+	<select id="selectReportList" resultMap="reportResultSet">
+		SELECT REPORT_NUM, MEMBER_ID, MEMBER_ID2, REPORT_CATE, REPORT_CONTENT, REPORT_DATE, REPORT_PATH, NAME, PHONE, EMAIL, ENROLL_DATE, STATUS
+		FROM (SELECT R.*, M.NAME, M.PHONE, M.EMAIL, M.ENROLL_DATE, M.STATUS
+			  FROM REPORT R
+			  	   JOIN MEMBER M ON(R.MEMBER_ID2 = M.MEMBER_ID)
+			  ORDER BY R.REPORT_NUM DESC)
+	</select>
+	
+	<resultMap type="Report" id="reportResultSet">
+		<id property="reportNum" column="REPORT_NUM"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="suspect" column="MEMBER_ID2"/>
+		<result property="reportCate" column="REPORT_CATE"/>
+		<result property="content" column="REPORT_CONTENT"/>
+		<result property="date" column="REPORT_DATE"/>
+		<result property="path" column="REPORT_PATH"/>
+		<result property="name" column="NAME"/>
+		<result property="phone" column="PHONE"/>
+		<result property="email" column="EMAIL"/>
+		<result property="enrollDate" column="ENROLL_DATE"/>
+		<result property="mStatus" column="STATUS"/>
+	</resultMap>
+	
+	<select id="selectReportDetail" resultMap="reportResultSet">
+		SELECT REPORT_NUM, MEMBER_ID, MEMBER_ID2, REPORT_CATE, REPORT_CONTENT, REPORT_DATE, REPORT_PATH, NAME, PHONE, EMAIL, ENROLL_DATE, STATUS
+		FROM (SELECT R.*, M.NAME, M.PHONE, M.EMAIL, M.ENROLL_DATE, M.STATUS
+			  FROM REPORT R
+			  	   JOIN MEMBER M ON(R.MEMBER_ID2 = M.MEMBER_ID)
+			  ORDER BY R.REPORT_NUM DESC)
+		WHERE REPORT_NUM = #{ reportNum }
+	</select>
+	
+	<select id="getSearchReportCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM REPORT R
+		    JOIN MEMBER M ON(R.MEMBER_ID2 = M.MEMBER_ID)
+		<if test="cate != null">
+			<choose>
+				<when test='cate == "name"'>
+					WHERE NAME LIKE '%'||#{ keyword }||'%'
+				</when>
+				<when test='cate == "suspect"'>
+					WHERE MEMBER_ID2 LIKE '%'||#{ keyword }||'%'
+				</when>
+			</choose>
+		</if>
+	</select>
+	
+	<select id="searchReportList" resultMap="reportResultSet">
+		SELECT REPORT_NUM, MEMBER_ID, MEMBER_ID2, REPORT_CATE, REPORT_CONTENT, REPORT_DATE, REPORT_PATH, NAME, PHONE, EMAIL, ENROLL_DATE, STATUS
+		FROM (SELECT R.*, M.NAME, M.PHONE, M.EMAIL, M.ENROLL_DATE, M.STATUS
+			  FROM REPORT R
+			  	   JOIN MEMBER M ON(R.MEMBER_ID2 = M.MEMBER_ID)
+			  ORDER BY R.REPORT_NUM DESC)
+		<if test="cate != null">
+			<choose>
+				<when test='cate == "name"'>
+					WHERE NAME LIKE '%'||#{ keyword }||'%'
+				</when>
+				<when test='cate == "suspect"'>
+					WHERE MEMBER_ID2 LIKE '%'||#{ keyword }||'%'
+				</when>
+			</choose>
+		</if>
+	</select>
+	
+	<select id="insertReport">
+		INSERT INTO REPORT
+		VALUES (SEQ_RCOUNT.NEXTVAL, #{memberId}, #{suspect}, #{reportCate}, #{content}, SYSDATE, #{path})
+	</select>
+</mapper>

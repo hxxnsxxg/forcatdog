@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+#answer{
+	width: 20px;
+}
+
+.btn {
+	margin-left: 25%;
+}
+
+.btn button {
+	color: white;
+	font-weight: bold;
+	font-size: 22px;
+	border: 1px solid white;
+	border-radius: 5px;
+}
+
+#submitBtn {
+	width: 120px;
+	height: 55px;
+	background: orange;
+	margin-right: 100px;
+}
+
+#cancelBtn {
+	width: 120px;
+	height: 55px;
+	background: gray;
+}
